@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        style="@style/input_day_matter_ll_item_container">
+
+        <ImageView
+            style="@style/input_day_matter_iv_style"
+            android:src="@drawable/ic_edit_title"/>
+
+        <EditText
+            android:id="@+id/id_input_et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <RelativeLayout
+        style="@style/input_day_matter_ll_item_container">
+        <TextView
+            android:id="@+id/id_input_tv_date"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="2018-05-21 星期一"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/input_day_matter_ll_item_container">
+        <TextView
+            android:id="@+id/id_input_tv_sort"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/sort"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+        <TextView
+            android:id="@+id/id_input_tv_sort_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/life"
+            android:textColor="@color/colorDefault"
+            android:drawableRight="@drawable/ic_arrow_down"
+            android:drawablePadding="20dp"
+            android:layout_margin="10dp"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/input_day_matter_ll_item_container">
+        <TextView
+            android:id="@+id/id_input_tv_is_top"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/set_top"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/id_input_switch_is_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/input_day_matter_ll_item_container">
+        <TextView
+            android:id="@+id/id_input_tv_repeat"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/repeat"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+        <TextView
+            android:id="@+id/id_input_tv_repeat_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/no_repeat"
+            android:textColor="@color/colorDefault"
+            android:drawableRight="@drawable/ic_arrow_down"
+            android:drawablePadding="20dp"
+            android:layout_margin="10dp"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_input_rl_end_date_switch_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/id_input_tv_is_end_date"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/end_date_title"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/id_input_switch_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_input_rl_end_date_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/id_input_tv_end_date"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="2018-05-21 星期一"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:layout_gravity="start"
+    android:background="#fff">
+
+    <TextView
+        android:id="@+id/id_header_main_tv_day_matter"
+        style="@style/header_main_tv_style"
+        android:drawableLeft="@drawable/ic_drawer_date"
+        android:text="Days Matter"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#fff"/>
+
+
+
+
+    <TextView
+        android:id="@+id/id_header_main_tv_more"
+        style="@style/header_main_tv_style"
+        android:layout_alignParentBottom="true"
+        android:drawableLeft="@drawable/ic_drawer_more"
+        android:text="More"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/id_header_main_tv_remind"
+        style="@style/header_main_tv_style"
+        android:layout_alignParentBottom="true"
+        android:drawableLeft="@drawable/ic_drawer_more"
+        android:text="Remind"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/id_header_main_tv_date_calc"
+        style="@style/header_main_tv_style"
+        android:layout_above="@id/id_header_main_tv_remind"
+        android:drawableLeft="@drawable/ic_drawer_calculate"
+        android:text="Date Calc"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_main_rv_sort"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_header_main_tv_day_matter"
+        android:layout_above="@id/id_header_main_tv_date_calc"/>
+
+</RelativeLayout>

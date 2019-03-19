@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_current_day_switch_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/current_day_remind"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/id_fg_remind_switch_current_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_current_day_remind_time_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/id_fg_remind_tv_current_day_remind_time"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="9:00"
+            android:textColor="@color/colorDefault"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_before_day_switch_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="@string/before_day_remind"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/id_fg_remind_switch_before_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_before_day_remind_time_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/id_fg_remind_tv_before_day_remind_time"
+            style="@style/input_day_matter_tv_item_title_style"
+            android:text="9:00"
+            android:textColor="@color/colorDefault"
+            android:drawableLeft="@drawable/ic_edit_title"/>
+    </RelativeLayout>
+
+</LinearLayout>

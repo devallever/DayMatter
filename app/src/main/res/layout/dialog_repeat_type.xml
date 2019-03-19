@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/please_choose_repeat_type"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <RadioButton
+            android:id="@+id/id_dialog_repeat_type_rb_no_repeat"
+            style="@style/dialog_repeat_type_rb_style"
+            android:text="@string/no_repeat"/>
+        <RadioButton
+            android:id="@+id/id_dialog_repeat_type_rb_per_week"
+            style="@style/dialog_repeat_type_rb_style"
+            android:text="@string/per_week_repeat"/>
+        <RadioButton
+            android:id="@+id/id_dialog_repeat_type_rb_per_month"
+            style="@style/dialog_repeat_type_rb_style"
+            android:text="@string/per_month_repeat"/>
+        <RadioButton
+            android:id="@+id/id_dialog_repeat_type_rb_per_year"
+            style="@style/dialog_repeat_type_rb_style"
+            android:text="@string/per_year_repeat"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/id_dialog_repeat_type_tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/cancel"
+        android:textColor="@color/colorDefault"/>
+
+
+</LinearLayout>

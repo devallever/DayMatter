@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style"
+        android:background="@color/gray">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from"/>
+        <TextView
+            android:id="@+id/id_fg_date_cal_tv_start_before_after_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-05-21"
+            android:textSize="18sp"
+            android:textColor="@color/colorDefault"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/begin"
+            android:drawableRight="@drawable/ic_arrow_down"
+            android:drawablePadding="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style">
+
+        <EditText
+            android:id="@+id/id_fg_date_cal_et_day_after"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_after"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style">
+        <TextView
+            android:id="@+id/id_fg_date_cal_tv_display_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_input_number"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style">
+
+        <EditText
+            android:id="@+id/id_fg_date_cal_et_day_before"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_before"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style">
+        <TextView
+            android:id="@+id/id_fg_date_cal_tv_display_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_input_number"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style"
+        android:background="@color/gray">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distance"/>
+
+        <TextView
+            android:id="@+id/id_fg_date_cal_tv_start_distance_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-05-21"
+            android:textSize="18sp"
+            android:textColor="@color/colorDefault"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/left"
+            android:drawableRight="@drawable/ic_arrow_down"
+            android:drawablePadding="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/date_calc_item_container_style">
+        <TextView
+            android:id="@+id/id_fg_date_cal_tv_display_distance_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="days"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="@color/white"
+            android:background="@drawable/days_bg_round_gray"/>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+
+</LinearLayout>
