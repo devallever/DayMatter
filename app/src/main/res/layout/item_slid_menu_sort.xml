@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:clickable="true"
+    android:gravity="center"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/id_item_slid_sort_tv_count"
@@ -20,9 +23,11 @@
         android:id="@+id/id_item_slid_sort_iv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_drawer_calculate"
+        android:src="@drawable/ic_drawer_menu"
         android:layout_centerVertical="true"
-        android:padding="10dp"/>
+        android:scaleType="centerInside"
+        android:padding="10dp"
+        android:tint="#222222"/>
 
     <TextView
         android:id="@+id/id_item_slid_sort_tv_name"
@@ -31,9 +36,16 @@
         android:layout_toLeftOf="@id/id_item_slid_sort_tv_count"
         android:layout_toRightOf="@id/id_item_slid_sort_iv_type"
         android:layout_centerVertical="true"
+        android:gravity="center_vertical"
         android:text="生活"
         android:textSize="12dp"
         android:padding="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

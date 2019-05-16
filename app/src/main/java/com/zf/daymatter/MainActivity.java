@@ -1,6 +1,8 @@
 package com.zf.daymatter;
 
 import android.app.ActivityManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.Fragment;
@@ -11,10 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -31,7 +35,10 @@ import com.zf.daymatter.ui.AddDayMatterActivity;
 import com.zf.daymatter.ui.DateCalcFragment;
 import com.zf.daymatter.ui.DayMatterListFragment;
 import com.zf.daymatter.ui.RemindFragment;
+import com.zf.daymatter.ui.TabModel;
+import com.zf.daymatter.ui.widget.tab.TabLayout;
 import com.zf.daymatter.utils.Constants;
+import com.zf.daymatter.utils.DisplayUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +51,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPresenter> implements IMainActivityView {
+public class MainActivity extends
+        BaseActivity<IMainActivityView,
+                MainActivityPresenter>
+        implements IMainActivityView, TabLayout.OnTabSelectedListener {
 
     private static final String TAG = "MainActivity";
 
@@ -56,12 +66,14 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
     DrawerLayout mDrawerLayout;
     @BindView(R.id.id_header_main_tv_day_matter)
     TextView mTvDayMatter;
-    @BindView(R.id.id_header_main_tv_more)
-    TextView mTvMore;
-    @BindView(R.id.id_header_main_tv_date_calc)
-    TextView mTvDateCalc;
+    //    @BindView(R.id.id_header_main_tv_more)
+//    TextView mTvMore;
+//    @BindView(R.id.id_header_main_tv_date_calc)
+//    TextView mTvDateCalc;
     @BindView(R.id.id_main_rv_sort)
     RecyclerView mRvSort;
+    @BindView(R.id.tab_layout)
+    com.zf.daymatter.ui.widget.tab.TabLayout mTab;
 
 
     private ViewPagerAdapter mViewPagerAdapter;
@@ -75,6 +87,9 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
     private int mPageIndex = 0;
 
     private int mSortId = 0;
+
+    private int mainTabHighlight = 0;
+    private int mainTabUnselectColor = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +134,7 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, mFragmentList);
     }
 
-    private void initSliceMenuSort(){
+    private void initSliceMenuSort() {
         mItemSlidMenuSortList = new ArrayList<>();
         mSlidMenuSortAdapter = new SlidMenuSortAdapter(mItemSlidMenuSortList);
         mRvSort.setLayoutManager(new LinearLayoutManager(this));
@@ -153,13 +168,13 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
                 mDrawerLayout,
                 mToolbar,
                 R.string.app_name,
-                R.string.app_name){
+                R.string.app_name) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 Log.d(TAG, "onDrawerClosed: position = " + mPageIndex);
 
                 //如果页面下标小于页面数，则允许切换页面，避免索引号异常
-                if (mPageIndex < mFragmentList.size()){
+                if (mPageIndex < mFragmentList.size()) {
                     mVp.setCurrentItem(mPageIndex);
                 }
             }
@@ -173,20 +188,21 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
 
         mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             @Override
             public void onPageSelected(int position) {
                 //页面切换时，更改Toolbar标题
-                switch (position){
+                switch (position) {
                     case 0:
-                        mToolbar.setTitle(getString(R.string.app_name));
+                        mToolbar.setTitle(getString(R.string.matter));
                         break;
                     case 1:
-                        mToolbar.setTitle(getString(R.string.date_cal));
+                        mToolbar.setTitle(getString(R.string.calc));
                         break;
                     case 2:
-                        mToolbar.setTitle(getString(R.string.remind_setting));
+                        mToolbar.setTitle(getString(R.string.setting));
                         break;
                     default:
                         break;
@@ -194,31 +210,105 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrollStateChanged(int state) {
+            }
         });
+
+        mainTabHighlight = getResources().getColor(R.color.main_tab_highlight);
+        mainTabUnselectColor = getResources().getColor(R.color.main_tab_unselect_color);
+
+
+        //tab
+        mVp.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTab));
+        mTab.setOnTabSelectedListener(this);
+
+        int tabCount = TabModel.INSTANCE.getTabCount();
+        for (int i = 0; i < tabCount; i++) {
+            TabModel.Tab tabModel = TabModel.INSTANCE.getTab(i);
+            int labelId = tabModel.getLabelResId();
+            TabLayout.Tab tab = mTab.newTab()
+                    .setTag(tabModel)
+                    .setCustomView(getTabView(i))
+                    .setContentDescription(labelId);
+            Drawable drawable = tabModel.getDrawable();
+            if (drawable != null) {
+                tab.setIcon(drawable);
+            } else {
+                tab.setIcon(tabModel.getIconResId());
+            }
+
+            tab.setText(labelId);
+            ImageView imageView = tab.getCustomView().findViewById(R.id.icon);
+            imageView.setColorFilter(null);
+            TextView textView = tab.getCustomView().findViewById(R.id.text1);
+            textView.setTextColor(mTab.getTabTextColors());
+            mTab.addTab(tab);
+        }
+
+        mTab.setSelectedTabIndicatorWidth(DisplayUtil.INSTANCE.dip2px(0));
+        mTab.setSelectedTabIndicatorHeight(DisplayUtil.INSTANCE.dip2px(0));
+        mTab.setSelectedTabIndicatorColor(mainTabHighlight);
+
+
     }
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mVp.setCurrentItem(tab.getPosition());
+
+        TabModel.INSTANCE.setSelectedTab((TabModel.Tab) tab.getTag());
+        for (int i = 0; i < mTab.getTabCount(); i++) {
+            TabLayout.Tab aTab = mTab.getTabAt(i);
+            if (aTab != null) {
+                ImageView imageView = aTab.getCustomView().findViewById(R.id.icon);
+                TextView textView = aTab.getCustomView().findViewById(R.id.text1);
+                if (aTab == tab) {
+                    imageView.setColorFilter(mainTabHighlight, PorterDuff.Mode.SRC_IN);
+                    textView.setTextColor(mainTabHighlight);
+                } else {
+                    imageView.setColorFilter(null);
+                    textView.setTextColor(mainTabUnselectColor);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onTabUnselected(com.zf.daymatter.ui.widget.tab.TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(com.zf.daymatter.ui.widget.tab.TabLayout.Tab tab) {
+
+    }
+
+
     @OnClick({R.id.id_header_main_tv_day_matter,
-            R.id.id_header_main_tv_more,
-            R.id.id_header_main_tv_date_calc,
-            R.id.id_header_main_tv_remind})
+//            R.id.id_header_main_tv_more,
+//            R.id.id_header_main_tv_date_calc,
+//            R.id.id_header_main_tv_remind,
+            R.id.id_header_main_tv_sort})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.id_header_main_tv_day_matter:
                 mPageIndex = 0;
                 mDrawerLayout.closeDrawers();
                 break;
-            case R.id.id_header_main_tv_date_calc:
-                mPageIndex = 1;
-                mDrawerLayout.closeDrawers();
-                break;
-            case R.id.id_header_main_tv_remind:
-                mPageIndex = 2;
-                mDrawerLayout.closeDrawers();
-                break;
-            case R.id.id_header_main_tv_more:
-                mPageIndex = 3;
-                mDrawerLayout.closeDrawers();
+//            case R.id.id_header_main_tv_date_calc:
+//                mPageIndex = 1;
+//                mDrawerLayout.closeDrawers();
+//                break;
+//            case R.id.id_header_main_tv_remind:
+//                mPageIndex = 2;
+//                mDrawerLayout.closeDrawers();
+//                break;
+//            case R.id.id_header_main_tv_more:
+//                mPageIndex = 3;
+//                mDrawerLayout.closeDrawers();
+//                break;
+            case R.id.id_header_main_tv_sort:
+                Toast.makeText(this, "分类管理", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -250,7 +340,7 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
 
     @Override
     public void setSlidMenuSort(List<ItemSlidMenuSort> itemSlidMenuSortList) {
-        if (itemSlidMenuSortList == null){
+        if (itemSlidMenuSortList == null) {
             return;
         }
 
@@ -260,6 +350,7 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
     }
 
     private long mPrevClickBackTime = -1;
+
     @Override
     public void onBackPressed() {
 //        ExitDialog exitDialog = new ExitDialog(this);
@@ -275,14 +366,15 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
         }
         Process.killProcess(Process.myPid());
     }
+
     /**
      * 响应倒计时事件操作
      * 添加、删除、修改事件都需要刷新列表
-     * */
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDayMatterOptionReceive(EventDayMatter event){
+    public void onDayMatterOptionReceive(EventDayMatter event) {
         String eventType = event.getEvent();
-        switch (eventType){
+        switch (eventType) {
             case Constants.EVENT_MODIFY_DAY_MATTER:
             case Constants.EVENT_DELETE_DAY_MATTER:
             case Constants.EVENT_ADD_DAY_MATTER:
@@ -292,5 +384,15 @@ public class MainActivity extends BaseActivity<IMainActivityView, MainActivityPr
                 break;
         }
 
+    }
+
+    private View getTabView(int position) {
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_bottom_tab, null);
+        ImageView imageView = view.findViewById(R.id.icon);
+        TextView textView = view.findViewById(R.id.text1);
+        TabModel.Tab tab = TabModel.INSTANCE.getTab(position);
+        textView.setText(tab.getLabelResId());
+        imageView.setImageResource(tab.getIconResId());
+        return view;
     }
 }

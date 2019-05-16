@@ -56,5 +56,9 @@
     <string name="before_day_remind">前天提醒</string>
     <string name="remind_setting">设置提醒方式</string>
 
+    <string name="setting">设置</string>
+    <string name="calc">日历计算器</string>
+    <string name="matter">倒数日</string>
+
 
 </resources>

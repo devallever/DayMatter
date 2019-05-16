@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#2196f3</color>
     <color name="colorPrimaryDark">#2196f3</color>
     <color name="colorAccent">#2196f3</color>
@@ -16,4 +17,8 @@
     <color name="alpha_gray_c">#99cccccc</color>
 
     <color name="orange_500">#ff9800</color>
+
+    <color name="main_tab_highlight">@color/colorAccent</color>
+    <color name="main_tab_unselect_color">#aaaaaa</color>
+
 </resources>

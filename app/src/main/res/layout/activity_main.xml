@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.zf.daymatter.MainActivity"
-    android:id="@+id/id_main_drawer_layout">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/id_main_drawer_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.zf.daymatter.MainActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+	<android.support.design.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-            <include layout="@layout/include_toolbar"/>
+		<android.support.design.widget.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-        </android.support.design.widget.AppBarLayout>
+			<include layout="@layout/include_toolbar" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/id_main_vp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+		</android.support.design.widget.AppBarLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <include layout="@layout/header_main_slide"/>
+			<android.support.v4.view.ViewPager
+				android:id="@+id/id_main_vp"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_above="@+id/divide_line" />
+
+			<View
+				android:id="@+id/divide_line"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_above="@+id/tab_layout"
+				android:background="#cccccc" />
+
+			<com.zf.daymatter.ui.widget.tab.TabLayout
+				android:id="@+id/tab_layout"
+				android:layout_width="match_parent"
+				android:layout_height="56dp"
+				android:layout_alignParentBottom="true" />
+
+		</RelativeLayout>
+
+
+	</android.support.design.widget.CoordinatorLayout>
+
+	<include layout="@layout/header_main_slide" />
 
 </android.support.v4.widget.DrawerLayout>
