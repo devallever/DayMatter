@@ -19,6 +19,6 @@
     <color name="orange_500">#ff9800</color>
 
     <color name="main_tab_highlight">@color/colorAccent</color>
-    <color name="main_tab_unselect_color">#aaaaaa</color>
+    <color name="main_tab_unselect_color">#8a8a8a</color>
 
 </resources>

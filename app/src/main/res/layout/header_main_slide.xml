@@ -6,7 +6,7 @@
 	android:layout_gravity="start"
 	android:background="#fff"
 	android:orientation="vertical"
-	tools:context=".MainActivity">
+	tools:context="com.allever.daymatter.MainActivity">
 
 	<TextView
 		android:id="@+id/id_header_main_tv_day_matter"

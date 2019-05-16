@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.zf.daymatter"
+        applicationId "com.allever.daymatter"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1

@@ -32,9 +32,9 @@
     	</list>
     -->
     <list>
-        <mapping class="com.zf.daymatter.data.Event"></mapping>
-        <mapping class="com.zf.daymatter.data.Event$Sort"></mapping>
-        <mapping class="com.zf.daymatter.data.Config"></mapping>
+        <mapping class="com.allever.daymatter.data.Event"></mapping>
+        <mapping class="com.allever.daymatter.data.Event$Sort"></mapping>
+        <mapping class="com.allever.daymatter.data.Config"></mapping>
     </list>
 
     <!--
