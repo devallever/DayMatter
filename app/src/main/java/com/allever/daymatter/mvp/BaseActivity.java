@@ -1,6 +1,7 @@
 package com.allever.daymatter.mvp;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import com.zf.daymatter.R;
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
     protected T mPresenter;
+    protected Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

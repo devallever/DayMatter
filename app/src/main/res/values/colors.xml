@@ -21,4 +21,8 @@
     <color name="main_tab_highlight">@color/colorAccent</color>
     <color name="main_tab_unselect_color">#8a8a8a</color>
 
+    <color name="sort_list_menu_modify_color">#aaaaaa</color>
+    <color name="sort_list_menu_delete_color">@color/red</color>
+
+
 </resources>

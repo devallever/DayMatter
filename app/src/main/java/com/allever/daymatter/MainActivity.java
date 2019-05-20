@@ -25,6 +25,7 @@ import com.allever.daymatter.ui.AddDayMatterActivity;
 import com.allever.daymatter.ui.DateCalcFragment;
 import com.allever.daymatter.ui.DayMatterListFragment;
 import com.allever.daymatter.ui.RemindFragment;
+import com.allever.daymatter.ui.SortListActivity;
 import com.allever.daymatter.ui.TabModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zf.daymatter.R;
@@ -150,11 +151,18 @@ public class MainActivity extends
                 mVp.setCurrentItem(mPageIndex);
                 mDrawerLayout.closeDrawers();
 
-                //发送消息事件通知更新列表，带sortId
-                EventDayMatter eventDayMatter = new EventDayMatter();
-                eventDayMatter.setEvent(Constants.EVENT_SELECT_DISPLAY_SORT_LIST);
-                eventDayMatter.setSortId(mSortId);
-                EventBus.getDefault().post(eventDayMatter);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //发送消息事件通知更新列表，带sortId
+                        EventDayMatter eventDayMatter = new EventDayMatter();
+                        eventDayMatter.setEvent(Constants.EVENT_SELECT_DISPLAY_SORT_LIST);
+                        eventDayMatter.setSortId(mSortId);
+                        EventBus.getDefault().post(eventDayMatter);
+                        mVp.setCurrentItem(mPageIndex);
+                    }
+                }, 500);
+
             }
         });
     }
@@ -178,7 +186,7 @@ public class MainActivity extends
                 }
             }
         };
-        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
+//        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         //要不要这个侧滑菜单栏的动画效果都无所谓了。
         actionBarDrawerToggle.syncState();
@@ -307,7 +315,13 @@ public class MainActivity extends
 //                mDrawerLayout.closeDrawers();
 //                break;
             case R.id.id_header_main_tv_sort:
-                Toast.makeText(this, "分类管理", Toast.LENGTH_SHORT).show();
+                SortListActivity.Companion.actionStart(MainActivity.this);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDrawerLayout.closeDrawers();
+                    }
+                }, 500);
                 break;
             default:
                 break;

@@ -60,5 +60,13 @@
     <string name="calc">日历计算器</string>
     <string name="matter">倒数日</string>
 
+    <string name="sort_list_menu_modify">修改</string>
+    <string name="sort_list_menu_delete">删除</string>
+
+    <string name="can_not_modify_default_sort">不能修改默认的分类</string>
+    <string name="can_not_delete_default_sort">不能删除默认的分类</string>
+
+    <string name="sort_manage">分类管理</string>
+
 
 </resources>

@@ -23,6 +23,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.allever.daymatter.ui.ModifyDayMatterActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.allever.daymatter.ui.SortListActivity"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name="com.allever.daymatter.receiver.CurrentAlarmReceiver"
