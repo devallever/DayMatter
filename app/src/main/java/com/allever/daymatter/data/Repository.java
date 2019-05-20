@@ -450,6 +450,26 @@ public class Repository implements DataSource {
 
     }
 
+    @Override
+    public int saveSort(String name) {
+        Event.Sort sort = new Event.Sort();
+        sort.setDefaultSort(false);
+        sort.setName(name);
+        sort.save();
+        return sort.getId();
+    }
+
+    @Override
+    public void modifySort(int id, String name) {
+        Event.Sort sort = DataSupport.find(Event.Sort.class, id);
+        sort.setName(name);
+        sort.update(id);
+    }
+
+    @Override
+    public void deleteSort(int id) {
+        DataSupport.delete(Event.Sort.class, id);
+    }
 
     /***
      *

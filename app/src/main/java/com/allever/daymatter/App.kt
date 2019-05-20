@@ -9,7 +9,7 @@ import org.litepal.LitePal
  * Created by Allever on 18/5/21.
  */
 
-class MyApp : Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this

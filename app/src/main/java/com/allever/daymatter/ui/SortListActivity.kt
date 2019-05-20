@@ -90,10 +90,19 @@ class SortListActivity : BaseActivity<ISortListView,
     override fun onItemClick(menuBridge: SwipeMenuBridge?, adapterPosition: Int) {
         menuBridge?.closeMenu()
         val menuIndex = menuBridge?.position
-        showToast("menu position = $menuIndex")
         if (adapterPosition in 0..3) {
             showToast(getString(R.string.can_not_modify_default_sort))
             return
+        }
+
+        if (menuBridge?.position == 0) {
+            mHandler.postDelayed({
+                mPresenter.modifySort(this, mSortData[adapterPosition])
+            }, 200)
+        } else if (menuBridge?.position == 1) {
+            mHandler.postDelayed({
+                mPresenter.deleteSort(this, mSortData[adapterPosition])
+            }, 200)
         }
 
     }
@@ -102,7 +111,7 @@ class SortListActivity : BaseActivity<ISortListView,
      * Rv Adapter item child回调
      */
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-        when(view?.id) {
+        when (view?.id) {
             R.id.id_item_slid_sort_iv_type -> {
                 mRvSort.smoothOpenRightMenu(position)
             }
@@ -113,9 +122,9 @@ class SortListActivity : BaseActivity<ISortListView,
      * 点击事件回调
      */
     override fun onClick(v: View?) {
-        when(v?.id) {
+        when (v?.id) {
             R.id.id_btn_add_sort -> {
-                showToast("添加事件")
+                mPresenter.addSort(this)
             }
         }
     }

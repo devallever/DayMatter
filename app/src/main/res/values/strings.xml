@@ -1,72 +1,82 @@
 <resources>
-    <string name="app_name">DayMatter</string>
+	<string name="app_name">DayMatter</string>
 
-    <string name="distance">距离</string>
-    <string name="has">还有</string>
-    <string name="sort">分类</string>
-    <string name="set_top">置顶</string>
-    <string name="repeat">重复</string>
-    <string name="end_date">结束时间</string>
-    <string name="save">保存</string>
-    <string name="end_date_title">结束时间</string>
-    <string name="life">生活</string>
-    <string name="no_repeat">不重复</string>
-    <string name="add_event">新增事件</string>
-    <string name="from">从</string>
-    <string name="begin">开始</string>
-    <string name="left">还有</string>
-    <string name="day_after">天之后</string>
-    <string name="day_before">天之前</string>
-    <string name="please_input_number">请输入数字开始计算</string>
-    <string name="delete">删除</string>
-    <string name="modify_day_matter">编辑事件</string>
-    <string name="add_sort">添加新分类</string>
+	<string name="distance">距离</string>
+	<string name="has">还有</string>
+	<string name="sort">分类</string>
+	<string name="set_top">置顶</string>
+	<string name="repeat">重复</string>
+	<string name="end_date">结束时间</string>
+	<string name="save">保存</string>
+	<string name="end_date_title">结束时间</string>
+	<string name="life">生活</string>
+	<string name="no_repeat">不重复</string>
+	<string name="add_event">新增事件</string>
+	<string name="from">从</string>
+	<string name="begin">开始</string>
+	<string name="left">还有</string>
+	<string name="day_after">天之后</string>
+	<string name="day_before">天之前</string>
+	<string name="please_input_number">请输入数字开始计算</string>
+	<string name="delete">删除</string>
+	<string name="modify_day_matter">编辑事件</string>
+	<string name="add_sort">添加新分类</string>
+	<string name="modify_sort">修改分类名</string>
+	<string name="delete_sort">删除分类</string>
+	<string name="make_sure_delete_sort">确定删除该分类吗?</string>
 
-    <string name="sort_life">生活</string>
-    <string name="sort_work">工作</string>
-    <string name="sort_memory_day">纪念日</string>
-    <string name="no_day_matter">还没添加倒数日</string>
-    <string name="please_input_event_title">请输入标题</string>
+	<string name="sort_life">生活</string>
+	<string name="sort_work">工作</string>
+	<string name="sort_memory_day">纪念日</string>
+	<string name="no_day_matter">还没添加倒数日</string>
+	<string name="please_input_event_title">请输入标题</string>
 
-    <string name="monday">星期一</string>
-    <string name="tuesday">星期二</string>
-    <string name="wednesday">星期三</string>
-    <string name="thursday">星期四</string>
-    <string name="friday">星期五</string>
-    <string name="saturday">星期六</string>
-    <string name="sunday">星期日</string>
-    <string name="please_open_end_date_switch">先打开结束时间</string>
-    <string name="saving">正在保存...</string>
+	<string name="monday">星期一</string>
+	<string name="tuesday">星期二</string>
+	<string name="wednesday">星期三</string>
+	<string name="thursday">星期四</string>
+	<string name="friday">星期五</string>
+	<string name="saturday">星期六</string>
+	<string name="sunday">星期日</string>
+	<string name="please_open_end_date_switch">先打开结束时间</string>
+	<string name="saving">正在保存...</string>
 
-    <string name="target_date">目标日：</string>
-    <string name="all">全部</string>
-    <string name="please_choose_repeat_type">请选择重复类型</string>
+	<string name="target_date">目标日：</string>
+	<string name="all">全部</string>
+	<string name="please_choose_repeat_type">请选择重复类型</string>
 
-    <string name="per_week_repeat">每周重复</string>
-    <string name="per_month_repeat">每月重复</string>
-    <string name="per_year_repeat">每年重复</string>
-    <string name="cancel">取消</string>
+	<string name="per_week_repeat">每周重复</string>
+	<string name="per_month_repeat">每月重复</string>
+	<string name="per_year_repeat">每年重复</string>
+	<string name="cancel">取消</string>
+	<string name="ok">确定</string>
 
-    <string name="date_fromat_yyyy_mm_dd_common">yyyy-MM-dd</string>
+	<string name="date_fromat_yyyy_mm_dd_common">yyyy-MM-dd</string>
 
-    <string name="already">已经</string>
-    <string name="please_choose_sort">请选择分类</string>
-    <string name="date_cal">日期计算器</string>
-    <string name="current_day_remind">当天提醒</string>
-    <string name="before_day_remind">前天提醒</string>
-    <string name="remind_setting">设置提醒方式</string>
+	<string name="already">已经</string>
+	<string name="please_choose_sort">请选择分类</string>
+	<string name="date_cal">日期计算器</string>
+	<string name="current_day_remind">当天提醒</string>
+	<string name="before_day_remind">前天提醒</string>
+	<string name="remind_setting">设置提醒方式</string>
 
-    <string name="setting">设置</string>
-    <string name="calc">日历计算器</string>
-    <string name="matter">倒数日</string>
+	<string name="setting">设置</string>
+	<string name="calc">日历计算器</string>
+	<string name="matter">倒数日</string>
 
-    <string name="sort_list_menu_modify">修改</string>
-    <string name="sort_list_menu_delete">删除</string>
+	<string name="sort_list_menu_modify">修改</string>
+	<string name="sort_list_menu_delete">删除</string>
 
-    <string name="can_not_modify_default_sort">不能修改默认的分类</string>
-    <string name="can_not_delete_default_sort">不能删除默认的分类</string>
+	<string name="can_not_modify_default_sort">不能修改默认的分类</string>
+	<string name="can_not_delete_default_sort">不能删除默认的分类</string>
 
-    <string name="sort_manage">分类管理</string>
+	<string name="sort_manage">分类管理</string>
+
+	<!--  dialog -->
+	<string name="dialog_default_title">Title</string>
+	<string name="dialog_default_message">Message</string>
+	<string name="dialog_default_positive_text">@string/ok</string>
+	<string name="dialog_default_negative_text">@string/cancel</string>
 
 
 </resources>

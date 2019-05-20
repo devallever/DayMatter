@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Complete!"
+        android:textColor="#40435b"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="24dp" />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="You can reset these in setting."
+        android:textColor="#8a8b97"
+        android:textSize="14sp"
+        android:layout_marginLeft="24dp" />
+
+    <EditText
+        android:id="@+id/id_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail"
+        android:layout_marginStart="24dp"
+        android:singleLine="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/separate"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/id_edit_text"
+        android:layout_marginTop="24dp"
+        android:background="#0d000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@+id/separate">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:text="PREVIOUS"
+            android:textColor="#b340435b"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:text="SURE"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>

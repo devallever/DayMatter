@@ -1,8 +1,6 @@
 package com.allever.daymatter.utils
 
-import android.content.Context
-import android.util.Log
-import com.allever.daymatter.MyApp
+import com.allever.daymatter.App
 
 /**
  * Created by allever on 17-8-5.
@@ -28,24 +26,24 @@ object DisplayUtil {
      * @result 返回dip或dp值
      */
     fun px2dip(px: Int): Int {
-        val density = MyApp.context.resources.displayMetrics.density
+        val density = App.context.resources.displayMetrics.density
         val result = (px / density + 0.5f).toInt()
         return result
     }
 
     fun dip2px(dip: Int): Int {
-        val density = MyApp.context.resources.displayMetrics.density
+        val density = App.context.resources.displayMetrics.density
         val result = (dip * density + 0.5f).toInt()
         return result
     }
 
     fun px2sp(px: Int): Int {
-        val scaledDensity = MyApp.context.resources.displayMetrics.scaledDensity
+        val scaledDensity = App.context.resources.displayMetrics.scaledDensity
         return (px / scaledDensity + 0.5f).toInt()
     }
 
     fun sp2px(sp: Int): Int {
-        val scaledDensity = MyApp.context.resources.displayMetrics.scaledDensity
+        val scaledDensity = App.context.resources.displayMetrics.scaledDensity
         return (sp * scaledDensity + 0.5f).toInt()
     }
 }

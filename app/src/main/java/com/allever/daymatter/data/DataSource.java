@@ -112,4 +112,8 @@ public interface DataSource {
     @Deprecated
     List<Event> getEventListByDate(int year, int month, int day);
     void getEventListByDate(int year, int month, int day, DataListener<List<Event>> dataListener);
+
+    int saveSort(String name);
+    void modifySort(int id, String name);
+    void deleteSort(int id);
 }
