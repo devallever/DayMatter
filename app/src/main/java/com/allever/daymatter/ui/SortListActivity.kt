@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
 import com.allever.daymatter.adapter.SortAdapter
-import com.allever.daymatter.bean.ItemSlidMenuSort
+import com.allever.daymatter.data.Event
 import com.allever.daymatter.mvp.BaseActivity
 import com.allever.daymatter.mvp.presenter.SortListPresenter
 import com.allever.daymatter.mvp.view.ISortListView
@@ -26,7 +26,7 @@ class SortListActivity : BaseActivity<ISortListView,
 
     private lateinit var mRvSort: SwipeRecyclerView
     private lateinit var mAdapter: SortAdapter
-    private var mSortData = mutableListOf<ItemSlidMenuSort>()
+    private var mSortData = mutableListOf<Event.Sort>()
     private lateinit var mToolbar: Toolbar
     private lateinit var mBtnAddSort: FloatingActionButton
 
@@ -90,7 +90,7 @@ class SortListActivity : BaseActivity<ISortListView,
     override fun onItemClick(menuBridge: SwipeMenuBridge?, adapterPosition: Int) {
         menuBridge?.closeMenu()
         val menuIndex = menuBridge?.position
-        if (adapterPosition in 0..3) {
+        if (adapterPosition in 0..2) {
             showToast(getString(R.string.can_not_modify_default_sort))
             return
         }
@@ -130,11 +130,12 @@ class SortListActivity : BaseActivity<ISortListView,
     }
 
 
-    override fun setSlidMenuSort(itemSlidMenuSortList: List<ItemSlidMenuSort>) {
+    override fun setSortData(data: List<Event.Sort>) {
         mSortData.clear()
-        mSortData.addAll(itemSlidMenuSortList)
+        mSortData.addAll(data)
         mAdapter.notifyDataSetChanged()
     }
+
 
     companion object {
         fun actionStart(context: Context?) {

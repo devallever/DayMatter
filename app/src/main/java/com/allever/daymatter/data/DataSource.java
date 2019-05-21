@@ -22,6 +22,8 @@ public interface DataSource {
     List<ItemSlidMenuSort> getSlidMenuSortData(Context context);
     void getSlidMenuSortData(Context context, DataListener<List<ItemSlidMenuSort>> dataListener);
 
+    void getSortData(Context context, DataListener<List<Event.Sort>> dataListener);
+
     /**
      * 第一次启动时初始化数据库，添加默认数据
      * @param context
@@ -113,7 +115,7 @@ public interface DataSource {
     List<Event> getEventListByDate(int year, int month, int day);
     void getEventListByDate(int year, int month, int day, DataListener<List<Event>> dataListener);
 
-    int saveSort(String name);
+    Event.Sort saveSort(String name);
     void modifySort(int id, String name);
     void deleteSort(int id);
 }

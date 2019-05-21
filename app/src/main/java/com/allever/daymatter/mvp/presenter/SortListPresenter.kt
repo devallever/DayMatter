@@ -6,12 +6,11 @@ import android.support.v7.app.AlertDialog
 import com.allever.daymatter.App
 import com.allever.daymatter.bean.ItemSlidMenuSort
 import com.allever.daymatter.data.DataListener
+import com.allever.daymatter.data.Event
 import com.allever.daymatter.dialog.DialogHelper
-import com.allever.daymatter.event.EventDayMatter
 import com.allever.daymatter.event.SortEvent
 import com.allever.daymatter.mvp.BasePresenter
 import com.allever.daymatter.mvp.view.ISortListView
-import com.allever.daymatter.utils.Constants
 import com.allever.demoapp.util.ToastUtil
 import com.zf.daymatter.R
 import org.greenrobot.eventbus.EventBus
@@ -20,9 +19,9 @@ class SortListPresenter : BasePresenter<ISortListView>() {
 
     fun getSlideMenuSortData(context: Context) {
         //List<ItemSlidMenuSort> list  = mDataSource.getSlidMenuSortData(context);
-        mDataSource.getSlidMenuSortData(context, object : DataListener<List<ItemSlidMenuSort>> {
-            override fun onSuccess(data: List<ItemSlidMenuSort>) {
-                mViewRef.get()?.setSlidMenuSort(data)
+        mDataSource.getSortData(context, object : DataListener<List<Event.Sort>> {
+            override fun onSuccess(data: List<Event.Sort>) {
+                mViewRef.get()?.setSortData(data)
                 val sortEvent = SortEvent()
                 EventBus.getDefault().post(sortEvent)
             }
@@ -58,7 +57,7 @@ class SortListPresenter : BasePresenter<ISortListView>() {
         dialog.show()
     }
 
-    fun modifySort(activity: Activity, sort: ItemSlidMenuSort) {
+    fun modifySort(activity: Activity, sort: Event.Sort) {
         val dialogBuilder = DialogHelper.Builder()
         dialogBuilder.title = App.context.resources.getString(R.string.modify_sort)
         dialogBuilder.etContent = sort.name
@@ -84,7 +83,7 @@ class SortListPresenter : BasePresenter<ISortListView>() {
         dialog.show()
     }
 
-    fun deleteSort(activity: Activity, sort: ItemSlidMenuSort) {
+    fun deleteSort(activity: Activity, sort: Event.Sort) {
         val builder = DialogHelper.Builder()
         builder.title = App.context.resources.getString(R.string.delete_sort)
         builder.message = App.context.resources.getString(R.string.make_sure_delete_sort)

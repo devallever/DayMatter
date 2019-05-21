@@ -1,20 +1,62 @@
 package com.allever.daymatter.dialog
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.AppCompatButton
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import com.allever.daymatter.App
+import com.allever.daymatter.adapter.DialogSortAdapter
+import com.allever.daymatter.bean.ItemSlidMenuSort
+import com.allever.daymatter.data.DataListener
+import com.allever.daymatter.data.Event
+import com.allever.daymatter.data.Repository
 import com.zf.daymatter.R
 import java.lang.Exception
 
 object DialogHelper{
 
-    fun createMessageDialog(activity: Context, builder: Builder?, callback: TextDialogCallback?): AlertDialog {
+    fun createSelectSortDialog(activity: Activity, callback: SelectSortCallback?): AlertDialog {
+        val dialog = AlertDialog.Builder(activity).create()
+        val view = LayoutInflater.from(activity).inflate(R.layout.dialog_select_sort, null)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.select_sort_rv)
+        val data = mutableListOf<Event.Sort>()
+        val adapter = DialogSortAdapter(data)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val data = data[position]
+            callback?.onItemClick(position, data.name, data.id, dialog)
+        }
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+
+        Repository.getIns().getSortData(activity, object : DataListener<List<Event.Sort>> {
+            override fun onSuccess(dataList: List<Event.Sort>?) {
+                data.clear()
+                if (dataList != null) {
+                    data.addAll(dataList)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFail(msg: String?) {}
+        })
+
+        val tvAddSort = view.findViewById<TextView>(R.id.select_sort_tv_add_sort)
+        tvAddSort.setOnClickListener {
+            callback?.onAddSortClick(dialog)
+        }
+        dialog.setView(view)
+        return dialog
+    }
+
+    fun createMessageDialog(activity: Activity, builder: Builder?, callback: TextDialogCallback?): AlertDialog {
         var builder = builder
         val dialog = AlertDialog.Builder(activity).create()
         val view = LayoutInflater.from(activity).inflate(R.layout.layout_alert_dialog, null)
@@ -124,6 +166,11 @@ object DialogHelper{
         fun onCancelClick(dialog: AlertDialog){}
     }
 
+    interface SelectSortCallback{
+        fun onItemClick(position: Int, sortName: String, id: Int, dialog: AlertDialog) {}
+        fun onAddSortClick(dialog: AlertDialog)
+    }
+
 
     class Builder{
         var title: String?= App.context.getString(R.string.dialog_default_title)
@@ -133,6 +180,7 @@ object DialogHelper{
         var showEditText: Boolean? = false
         var showMessage: Boolean? = true
         var etContent: String? = ""
+        var list: MutableList<Any>? = null
 
         fun setTitleContent(title: String): Builder{
             this.title = title

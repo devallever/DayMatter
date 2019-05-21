@@ -451,12 +451,55 @@ public class Repository implements DataSource {
     }
 
     @Override
-    public int saveSort(String name) {
+    public void getSortData(Context context, final DataListener<List<Event.Sort>> dataListener) {
+        if (context == null || dataListener == null){
+            return;
+        }
+
+        //异步调用
+        final List<Event.Sort> list = new ArrayList<>();
+
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                //查询分类数
+                List<Event.Sort> sortList = DataSupport.findAll(Event.Sort.class);
+                Log.d(TAG, "getSortData: sort size = " + sortList.size());
+                list.addAll(sortList);
+                emitter.onComplete();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dataListener.onFail(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        dataListener.onSuccess(list);
+                    }
+                });
+    }
+
+    @Override
+    public Event.Sort saveSort(String name) {
         Event.Sort sort = new Event.Sort();
         sort.setDefaultSort(false);
         sort.setName(name);
         sort.save();
-        return sort.getId();
+        return sort;
     }
 
     @Override

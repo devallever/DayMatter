@@ -1,7 +1,7 @@
 package com.allever.daymatter.mvp.view
 
-import com.allever.daymatter.bean.ItemSlidMenuSort
+import com.allever.daymatter.data.Event
 
 public interface ISortListView {
-    fun setSlidMenuSort(itemSlidMenuSortList: List<ItemSlidMenuSort>)
+    fun setSortData(itemSlidMenuSortList: List<Event.Sort>)
 }

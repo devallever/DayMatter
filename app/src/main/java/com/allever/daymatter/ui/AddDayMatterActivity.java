@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -19,6 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.allever.daymatter.App;
+import com.allever.daymatter.data.Event;
+import com.allever.daymatter.data.Repository;
+import com.allever.daymatter.dialog.DialogHelper;
+import com.allever.daymatter.event.SortEvent;
+import com.allever.demoapp.util.ToastUtil;
 import com.zf.daymatter.R;
 import com.allever.daymatter.dialog.RepeatTypeDialog;
 import com.allever.daymatter.dialog.SortDialog;
@@ -26,6 +33,9 @@ import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.presenter.AddDayMatterPresenter;
 import com.allever.daymatter.mvp.view.IAddDayMatterView;
 import com.allever.daymatter.utils.Constants;
+
+import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,7 +88,9 @@ public class AddDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDay
 
     private RepeatTypeDialog mRepeatDialog;
 
-    private SortDialog mSortDialog;
+//    private SortDialog mSortDialog;
+
+    private AlertDialog mAddSortDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -153,20 +165,33 @@ public class AddDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDay
             }
         });
 
-        mSortDialog = SortDialog.newInsance(new SortDialog.OptionListener() {
+
+
+        DialogHelper.Builder addSortDialogBuilder = new DialogHelper.Builder()
+                .isShowEditText(true)
+                .isShowMessage(false)
+                .setTitleContent(getString(R.string.add_sort));
+        mAddSortDialog = DialogHelper.INSTANCE.createEditTextDialog(this, addSortDialogBuilder, new DialogHelper.EditDialogCallback() {
             @Override
-            public void onItemClick(DialogFragment dialog, String sortName, int sortId) {
-                mPresenter.setmSortId(sortId);
-                setSort(sortName);
-                dialog.dismiss();
+            public void onOkClick(@NotNull AlertDialog dialog, @NotNull String etContent) {
+                if (etContent.isEmpty()) {
+                    ToastUtil.INSTANCE.show("请输入内容");
+                    return;
+                } else {
+                    Event.Sort sort = Repository.getIns().saveSort(etContent);
+                    SortEvent sortEvent = new SortEvent();
+                    EventBus.getDefault().post(sortEvent);
+                    dialog.dismiss();
+                    mPresenter.setmSortId(sort.getId());
+                    setSort(sort.getName());
+                }
             }
 
             @Override
-            public void onCancel(DialogFragment dialog) {
-                dialog.dismiss();
+            public void onCancelClick(@NotNull AlertDialog dialog) {
+
             }
         });
-
 
     }
 
@@ -215,7 +240,26 @@ public class AddDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDay
             //分类
             case R.id.id_input_tv_sort:
                 //打开选择分类界面
-                mSortDialog.show(getSupportFragmentManager(),TAG);
+                DialogHelper.INSTANCE.createSelectSortDialog(this, new DialogHelper.SelectSortCallback(){
+                    @Override
+                    public void onItemClick(int position, @NotNull String sortName, int id, @NotNull AlertDialog dialog) {
+                        mPresenter.setmSortId(id);
+                        setSort(sortName);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onAddSortClick(@NotNull AlertDialog dialog) {
+                        dialog.dismiss();
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAddSortDialog.show();
+                            }
+                        }, 100);
+                    }
+                })
+                .show();
                 break;
 
             //置顶项
