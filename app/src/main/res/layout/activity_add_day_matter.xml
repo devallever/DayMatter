@@ -28,4 +28,35 @@
         android:text="@string/save"
         android:textColor="@color/white"/>
 
+    <LinearLayout
+        android:id="@+id/id_add_day_matter_delete_update_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/id_edit_day_matter_btn_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            android:background="@color/red_300"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/id_edit_day_matter_btn_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save"
+            android:background="@color/colorDefault"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+
+
 </LinearLayout>

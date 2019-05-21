@@ -7,6 +7,7 @@ import android.widget.DatePicker;
 
 import com.allever.daymatter.data.Event;
 import com.allever.daymatter.event.EventDayMatter;
+import com.allever.daymatter.mvp.view.IModifyDayMatterView;
 import com.allever.daymatter.utils.Constants;
 import com.allever.daymatter.utils.DateUtils;
 import com.zf.daymatter.R;
@@ -171,4 +172,97 @@ public class EditDayMatterPresenter extends BasePresenter<IAddDayMatterView> {
         eventDayMatter.setEvent(Constants.EVENT_ADD_DAY_MATTER);
         EventBus.getDefault().post(eventDayMatter);
     }
+
+    public void updateEvent(int eventId, String eventTitle) {
+        mViewRef.get().showProgressDialog();
+        mDataSource.updateEvent(mEvent);
+
+        mViewRef.get().finishSelf();
+
+        //通知外界刷新界面
+        EventDayMatter eventDayMatter = new EventDayMatter();
+        eventDayMatter.setEvent(Constants.EVENT_MODIFY_DAY_MATTER);
+        eventDayMatter.setEventId(eventId);
+        eventDayMatter.setSortId(mEvent.getSortId());
+        EventBus.getDefault().post(eventDayMatter);
+    }
+
+    public void getEventData(Context context, int eventId) {
+        Event event = mDataSource.getEvent(eventId);
+        mEvent = event;
+
+        //设置界面
+        IAddDayMatterView mView = getView();
+        mView.setEtTetle(event.getTitle());
+
+        mView.setTvDate(DateUtils.formatDate_Y_M_D_WEEK_New(context,
+                event.getYear(),
+                event.getMonth()-1,
+                event.getDay(),
+                event.getWeekDay()));
+
+        String sortName = mDataSource.getSortName(event.getSortId());
+        if (!TextUtils.isEmpty(sortName)){
+            mView.setSort(sortName);
+        }else {
+            mView.setSort(context.getResources().getString(R.string.sort_life));
+        }
+
+        mView.setTopSwitch(event.isTop());
+
+        switch (event.getRepeatType()){
+            case Constants.REPEAT_TYPE_NO_REPEAT:
+                mView.setTvRepeatType(context.getString(R.string.no_repeat));
+                //设置结束时间可见
+                mView.setEndDateSwitchVisible();
+                if (event.isEndSwitch()){
+                    mView.setEndDateItemVisible();
+                }else {
+                    mView.setEndDateItemGone();
+                }
+                break;
+            case Constants.REPEAT_TYPE_PER_WEEK:
+                mView.setTvRepeatType(context.getString(R.string.per_week_repeat));
+                mView.setEndDateItemGone();
+                mView.setEndDateSwitchGone();
+                break;
+            case Constants.REPEAT_TYPE_PER_MONTH:
+                mView.setTvRepeatType(context.getString(R.string.per_month_repeat));
+                mView.setEndDateItemGone();
+                mView.setEndDateSwitchGone();
+                break;
+            case Constants.REPEAT_TYPE_PER_YEAR:
+                mView.setTvRepeatType(context.getString(R.string.per_year_repeat));
+                mView.setEndDateItemGone();
+                mView.setEndDateSwitchGone();
+                break;
+            default:
+                break;
+        }
+
+
+        mView.setEndDateSwitch(event.isEndSwitch());
+
+        mView.setTvEndDate(DateUtils.formatDate_Y_M_D_WEEK_New(context,
+                event.getEndYear(),
+                event.getEndMonth()- 1,
+                event.getEndDay(),
+                event.getEndWeekday()));
+    }
+
+    public void deleteDayMatter(int eventId) {
+        //从数据库中删除
+        mDataSource.deleteEvent(eventId);
+
+        EventDayMatter eventDayMatter = new EventDayMatter();
+        eventDayMatter.setSortId(mEvent.getSortId());
+        eventDayMatter.setEvent(Constants.EVENT_DELETE_DAY_MATTER);
+
+        //刷新界面
+        EventBus.getDefault().post(eventDayMatter);
+
+        //1.结束自己
+        mViewRef.get().finishSelf();
+    }
+
 }

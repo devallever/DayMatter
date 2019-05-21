@@ -131,7 +131,7 @@ public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, 
         int id = item.getItemId();
         switch (id){
             case R.id.id_menu_day_matter_detail_edit:
-                ModifyDayMatterActivity.startSelf(this, mItemDayMatterList.get(mPagePosition).getId());
+                EditDayMatterActivity.startSelf(this, true,  mItemDayMatterList.get(mPagePosition).getId());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

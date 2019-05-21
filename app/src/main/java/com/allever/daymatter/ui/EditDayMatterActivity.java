@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -46,6 +47,12 @@ import butterknife.OnClick;
 public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditDayMatterPresenter> implements IAddDayMatterView {
 
     private static final String TAG = "EditDayMatterActivity";
+    private static final String EXTRA_EDIT_MODE = "EXTRA_EDIT_MODE";
+    private static final String EXTRA_EVENT_ID = "EXTRA_EVENT_ID";
+    private static final int DEFAULT_EVENT_ID = -1;
+
+    private boolean mIsEditMode = false;
+    private int mEventId = DEFAULT_EVENT_ID;
 
     @BindView(R.id.id_toolbar)
     Toolbar mToolbar;
@@ -79,6 +86,12 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
     RelativeLayout mRlEndDateSwitchContainer;
     @BindView(R.id.id_input_rl_end_date_container)
     RelativeLayout mRlEndDateContainer;
+    @BindView(R.id.id_edit_day_matter_btn_delete)
+    Button mBtnDelete;
+    @BindView(R.id.id_edit_day_matter_btn_update)
+    Button mBtnUpdate;
+    @BindView(R.id.id_add_day_matter_delete_update_container)
+    ViewGroup mDeleteUpdateContainer;
 
     private String mEventTitle;
 
@@ -97,7 +110,20 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
 
         ButterKnife.bind(this);
 
-        initToolbar(mToolbar, R.string.add_event);
+        mIsEditMode = getIntent().getBooleanExtra(EXTRA_EDIT_MODE, false);
+        mEventId = getIntent().getIntExtra(EXTRA_EVENT_ID, -1);
+
+        if (mIsEditMode) {
+            initToolbar(mToolbar, R.string.modify_day_matter);
+            mBtnSave.setVisibility(View.GONE);
+            mDeleteUpdateContainer.setVisibility(View.VISIBLE);
+            mPresenter.getEventData(this, mEventId);
+        } else {
+            mPresenter.getDefaultData(this);
+            initToolbar(mToolbar, R.string.add_event);
+            mBtnSave.setVisibility(View.VISIBLE);
+            mDeleteUpdateContainer.setVisibility(View.GONE);
+        }
 
         initDialog();
 
@@ -105,7 +131,6 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
         setListener();
 
         //设置事件默认值->
-        mPresenter.getDefaultData(this);
     }
 
     private void initDialog() {
@@ -198,8 +223,10 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
         return new EditDayMatterPresenter();
     }
 
-    public static void startSelf(Context context) {
+    public static void startSelf(Context context, boolean editMode, int eventId) {
         Intent intent = new Intent(context, EditDayMatterActivity.class);
+        intent.putExtra(EXTRA_EDIT_MODE, editMode);
+        intent.putExtra(EXTRA_EVENT_ID, eventId);
         context.startActivity(intent);
     }
 
@@ -225,6 +252,8 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
             R.id.id_input_tv_repeat,
             R.id.id_input_tv_is_end_date,
             R.id.id_input_tv_end_date,
+            R.id.id_edit_day_matter_btn_delete,
+            R.id.id_edit_day_matter_btn_update,
             R.id.id_add_day_matter_btn_save})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -297,6 +326,19 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
                 } else {
                     showToast(getResources().getString(R.string.please_input_event_title));
                 }
+                break;
+            case R.id.id_edit_day_matter_btn_update:
+                String content = mEtEventTitle.getText().toString();
+                if (mEventId != DEFAULT_EVENT_ID && !content.isEmpty()) {
+                    mPresenter.updateEvent(mEventId, content);
+                }
+                break;
+
+            case R.id.id_edit_day_matter_btn_delete:
+                if (mEventId != DEFAULT_EVENT_ID) {
+                    mPresenter.deleteDayMatter(mEventId);
+                }
+                break;
 
             default:
                 break;
@@ -382,4 +424,11 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
     public void setEndDateSwitchGone() {
         mRlEndDateSwitchContainer.setVisibility(View.GONE);
     }
+
+    @Override
+    public void setEtTetle(String title) {
+        mEtEventTitle.setText(title);
+    }
+
+
 }

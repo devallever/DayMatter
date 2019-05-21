@@ -342,7 +342,7 @@ public class MainActivity extends
         int id = item.getItemId();
         switch (id) {
             case R.id.id_menu_main_add:
-                EditDayMatterActivity.startSelf(this);
+                EditDayMatterActivity.startSelf(this, false, -1);
                 break;
 //            case R.id.id_menu_main_style:
 //                showToast("Style");

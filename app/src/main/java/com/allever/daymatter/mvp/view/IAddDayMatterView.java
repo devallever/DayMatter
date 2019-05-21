@@ -29,4 +29,5 @@ public interface IAddDayMatterView {
     void setEndDateItemGone();
     void setEndDateSwitchVisible();
     void setEndDateSwitchGone();
+    void setEtTetle(String title);
 }
