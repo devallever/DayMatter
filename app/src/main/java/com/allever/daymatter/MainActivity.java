@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.allever.daymatter.event.Event;
 import com.allever.daymatter.event.SortEvent;
-import com.allever.daymatter.ui.AddDayMatterActivity;
+import com.allever.daymatter.ui.EditDayMatterActivity;
 import com.allever.daymatter.ui.DateCalcFragment;
 import com.allever.daymatter.ui.DayMatterListFragment;
 import com.allever.daymatter.ui.RemindFragment;
@@ -342,7 +342,7 @@ public class MainActivity extends
         int id = item.getItemId();
         switch (id) {
             case R.id.id_menu_main_add:
-                AddDayMatterActivity.startSelf(this);
+                EditDayMatterActivity.startSelf(this);
                 break;
 //            case R.id.id_menu_main_style:
 //                showToast("Style");

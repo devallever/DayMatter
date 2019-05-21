@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.allever.daymatter.App;
 import com.allever.daymatter.data.Event;
 import com.allever.daymatter.data.Repository;
 import com.allever.daymatter.dialog.DialogHelper;
@@ -28,7 +27,6 @@ import com.allever.daymatter.event.SortEvent;
 import com.allever.demoapp.util.ToastUtil;
 import com.zf.daymatter.R;
 import com.allever.daymatter.dialog.RepeatTypeDialog;
-import com.allever.daymatter.dialog.SortDialog;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.presenter.AddDayMatterPresenter;
 import com.allever.daymatter.mvp.view.IAddDayMatterView;
@@ -45,9 +43,9 @@ import butterknife.OnClick;
  * Created by Allever on 18/5/21.
  */
 
-public class AddDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDayMatterPresenter> implements IAddDayMatterView {
+public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDayMatterPresenter> implements IAddDayMatterView {
 
-    private static final String TAG = "AddDayMatterActivity";
+    private static final String TAG = "EditDayMatterActivity";
 
     @BindView(R.id.id_toolbar)
     Toolbar mToolbar;
@@ -201,7 +199,7 @@ public class AddDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDay
     }
 
     public static void startSelf(Context context) {
-        Intent intent = new Intent(context, AddDayMatterActivity.class);
+        Intent intent = new Intent(context, EditDayMatterActivity.class);
         context.startActivity(intent);
     }
 

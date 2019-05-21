@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.allever.daymatter.ui.AddDayMatterActivity"
+        <activity android:name="com.allever.daymatter.ui.EditDayMatterActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.allever.daymatter.ui.DayMatterDetailActivity"
             android:screenOrientation="portrait"/>

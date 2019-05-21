@@ -110,7 +110,7 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
 
     @OnClick(R.id.id_main_cv_no_data)
     public void onViewClicked() {
-        AddDayMatterActivity.startSelf(mActivity);
+        EditDayMatterActivity.startSelf(mActivity);
     }
 
     @Override
