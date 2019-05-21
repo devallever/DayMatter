@@ -21,15 +21,15 @@ import java.util.Calendar;
  * Created by Allever on 18/5/21.
  */
 
-public class AddDayMatterPresenter extends BasePresenter<IAddDayMatterView> {
+public class EditDayMatterPresenter extends BasePresenter<IAddDayMatterView> {
 
-    private static final String TAG = "AddDayMatterPresenter";
+    private static final String TAG = "EditDayMatterPresenter";
 
     private Calendar mCalendar;
 
     private Event mEvent;
 
-    public AddDayMatterPresenter(){
+    public EditDayMatterPresenter(){
         init();
     }
 

@@ -24,11 +24,11 @@ import com.allever.daymatter.data.Event;
 import com.allever.daymatter.data.Repository;
 import com.allever.daymatter.dialog.DialogHelper;
 import com.allever.daymatter.event.SortEvent;
+import com.allever.daymatter.mvp.presenter.EditDayMatterPresenter;
 import com.allever.demoapp.util.ToastUtil;
 import com.zf.daymatter.R;
 import com.allever.daymatter.dialog.RepeatTypeDialog;
 import com.allever.daymatter.mvp.BaseActivity;
-import com.allever.daymatter.mvp.presenter.AddDayMatterPresenter;
 import com.allever.daymatter.mvp.view.IAddDayMatterView;
 import com.allever.daymatter.utils.Constants;
 
@@ -43,7 +43,7 @@ import butterknife.OnClick;
  * Created by Allever on 18/5/21.
  */
 
-public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDayMatterPresenter> implements IAddDayMatterView {
+public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditDayMatterPresenter> implements IAddDayMatterView {
 
     private static final String TAG = "EditDayMatterActivity";
 
@@ -194,8 +194,8 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, AddDa
     }
 
     @Override
-    protected AddDayMatterPresenter createPresenter() {
-        return new AddDayMatterPresenter();
+    protected EditDayMatterPresenter createPresenter() {
+        return new EditDayMatterPresenter();
     }
 
     public static void startSelf(Context context) {
