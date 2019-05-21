@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.allever.daymatter.event.Event;
+import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.ui.AddDayMatterActivity;
 import com.allever.daymatter.ui.DateCalcFragment;
 import com.allever.daymatter.ui.DayMatterListFragment;
@@ -395,6 +397,14 @@ public class MainActivity extends
                 break;
             default:
                 break;
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventReceive(Event event) {
+        if (event instanceof SortEvent) {
+            mPresenter.getSlideMenuSortData(this);
         }
 
     }

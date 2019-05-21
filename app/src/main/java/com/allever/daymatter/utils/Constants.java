@@ -21,6 +21,8 @@ public class Constants {
     public static final String EVENT_MODIFY_DAY_MATTER = "EVENT_MODIFY_DAY_MATTER";
     public static final String EVENT_DELETE_DAY_MATTER = "EVENT_DELETE_DAY_MATTER";
 
+
+
     public static final int SORT_LIFE = 1;
     public static final int SORT_WORK = 2;
     public static final int SORT_MEMORY_DAY = 3;

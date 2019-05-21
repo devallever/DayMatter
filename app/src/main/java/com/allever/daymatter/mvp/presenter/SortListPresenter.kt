@@ -7,10 +7,14 @@ import com.allever.daymatter.App
 import com.allever.daymatter.bean.ItemSlidMenuSort
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.dialog.DialogHelper
+import com.allever.daymatter.event.EventDayMatter
+import com.allever.daymatter.event.SortEvent
 import com.allever.daymatter.mvp.BasePresenter
 import com.allever.daymatter.mvp.view.ISortListView
+import com.allever.daymatter.utils.Constants
 import com.allever.demoapp.util.ToastUtil
 import com.zf.daymatter.R
+import org.greenrobot.eventbus.EventBus
 
 class SortListPresenter : BasePresenter<ISortListView>() {
 
@@ -19,6 +23,8 @@ class SortListPresenter : BasePresenter<ISortListView>() {
         mDataSource.getSlidMenuSortData(context, object : DataListener<List<ItemSlidMenuSort>> {
             override fun onSuccess(data: List<ItemSlidMenuSort>) {
                 mViewRef.get()?.setSlidMenuSort(data)
+                val sortEvent = SortEvent()
+                EventBus.getDefault().post(sortEvent)
             }
 
             override fun onFail(msg: String) {
