@@ -55,5 +55,20 @@
 		android:layout_marginBottom="20dp"
 		android:layout_centerHorizontal="true"/>
 
+	<TextView
+		android:id="@+id/about_privacy"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/privacy"
+		android:layout_centerHorizontal="true"
+		android:layout_above="@id/about_right"
+		android:layout_marginBottom="60dp"
+		android:drawableLeft="@drawable/ic_google_play_privacy"
+		android:drawableStart="@drawable/ic_google_play_privacy"
+		android:drawablePadding="10dp"
+		android:padding="5dp"
+		android:textSize="12sp"
+		android:gravity="center"/>
+
 
 </RelativeLayout>

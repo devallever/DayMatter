@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.allever.daymatter.mvp.BaseActivity
@@ -11,9 +13,11 @@ import com.allever.daymatter.mvp.presenter.AboutPresenter
 import com.allever.daymatter.mvp.view.IAboutView
 import com.zf.daymatter.R
 
-class AboutActivity: BaseActivity<IAboutView, AboutPresenter>() {
+class AboutActivity : BaseActivity<IAboutView, AboutPresenter>(), View.OnClickListener {
+
 
     private lateinit var mToolbar: Toolbar
+    private lateinit var mTvPrivacy: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +30,23 @@ class AboutActivity: BaseActivity<IAboutView, AboutPresenter>() {
 
     private fun initView() {
         mToolbar = findViewById(R.id.id_toolbar)
+        mTvPrivacy = findViewById(R.id.about_privacy)
+        mTvPrivacy.setOnClickListener(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
     }
+
     override fun createPresenter(): AboutPresenter = AboutPresenter()
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.about_privacy -> {
+                mPresenter.goToPrivacy()
+            }
+        }
+    }
 
     companion object {
         fun actionStart(context: Context) {

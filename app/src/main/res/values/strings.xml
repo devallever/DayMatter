@@ -85,6 +85,7 @@
 	<string name="feed_back_content">我们很希望能得到您的建议：</string>
 	<string name="select_mail_app">请选择邮件类应用</string>
 	<string name="has_not_google_service">没安装谷歌服务</string>
+	<string name="privacy">隐私政策</string>
 
 
 </resources>
