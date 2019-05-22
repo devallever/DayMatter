@@ -33,4 +33,21 @@ object TimeUtils {
         }
         return min + ":" + sec.trim { it <= ' ' }.substring(0, 2)
     }
+
+    fun formatTime(hour: Int, min: Int): String {
+        val hourStr =
+                if (hour < 10) {
+                    "0$hour"
+                } else {
+                    hour.toString()
+                }
+        val minStr =
+                if (min < 10) {
+                    "0$min"
+                } else {
+                    min.toString()
+                }
+
+        return "$hourStr:$minStr"
+    }
 }

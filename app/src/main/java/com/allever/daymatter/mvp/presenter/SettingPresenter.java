@@ -9,6 +9,9 @@ import com.allever.daymatter.receiver.CurrentAlarmReceiver;
 import com.allever.daymatter.utils.RemindUtils;
 import com.allever.daymatter.mvp.BasePresenter;
 import com.allever.daymatter.mvp.view.ISettingView;
+import com.allever.daymatter.utils.TimeUtils;
+
+import java.util.Calendar;
 
 /**
  * Created by Allever on 18/6/1.
@@ -17,6 +20,8 @@ import com.allever.daymatter.mvp.view.ISettingView;
 public class SettingPresenter extends BasePresenter<ISettingView> {
 
     private static final String TAG = "SettingPresenter";
+
+    private Calendar mCalendar = Calendar.getInstance();
 
     public void getRemindConfig() {
         Config config = mDataSource.getRemindConfigData();
@@ -45,9 +50,9 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
         }
         mViewRef.get().setBeforeRemindSwitch(beforeSwitch);
 
-        mViewRef.get().setCurrentRemindTime(config.getCurrentRemindHour() + ":" + config.getCurrentRemindMin());
+        mViewRef.get().setCurrentRemindTime(TimeUtils.INSTANCE.formatTime(config.getCurrentRemindHour(), config.getCurrentRemindMin()));
 
-        mViewRef.get().setBeforeRemindTime(config.getBeforeRemindHour() + ":" + config.getBeforeRemindMin());
+        mViewRef.get().setBeforeRemindTime(TimeUtils.INSTANCE.formatTime(config.getBeforeRemindHour(), config.getBeforeRemindMin()));
 
         mViewRef.get().returnRemindConfig(config);
 

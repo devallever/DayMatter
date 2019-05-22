@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.allever.daymatter.utils.TimeUtils;
 import com.zf.daymatter.R;
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.mvp.BaseFragment;
@@ -113,7 +114,7 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
                 //保存到数据库
                 mPresenter.updateCurrentRemindTime(hourOfDay, minute);
                 //
-                setCurrentRemindTime(hourOfDay + ":" + minute);
+                setCurrentRemindTime(TimeUtils.INSTANCE.formatTime(hourOfDay, minute));
 
                 //更新提醒
                 mPresenter.setCurrentDayRemind(getActivity());
@@ -127,7 +128,7 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
                 //保存到数据库
                 mPresenter.updateBeforeRemindTime(hourOfDay, minute);
                 //
-                setBeforeRemindTime(hourOfDay + ":" + minute);
+                setBeforeRemindTime(TimeUtils.INSTANCE.formatTime(hourOfDay, minute));
 
                 //更新提醒
                 mPresenter.setBeforeDayRemind(getActivity());
