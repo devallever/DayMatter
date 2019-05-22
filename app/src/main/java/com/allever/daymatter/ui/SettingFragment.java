@@ -4,7 +4,6 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +16,8 @@ import android.widget.TimePicker;
 import com.zf.daymatter.R;
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.mvp.BaseFragment;
-import com.allever.daymatter.mvp.presenter.RemindPresenter;
-import com.allever.daymatter.mvp.view.IRemindView;
+import com.allever.daymatter.mvp.presenter.SettingPresenter;
+import com.allever.daymatter.mvp.view.ISettingView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,9 +28,9 @@ import butterknife.Unbinder;
  * Created by Allever on 18/6/1.
  */
 
-public class RemindFragment extends BaseFragment<IRemindView, RemindPresenter> implements IRemindView {
+public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter> implements ISettingView {
 
-    private static final String TAG = "RemindFragment";
+    private static final String TAG = "SettingFragment";
 
     Unbinder unbinder;
 
@@ -163,8 +162,8 @@ public class RemindFragment extends BaseFragment<IRemindView, RemindPresenter> i
     }
 
     @Override
-    protected RemindPresenter createPresenter() {
-        return new RemindPresenter();
+    protected SettingPresenter createPresenter() {
+        return new SettingPresenter();
     }
 
     @Override

@@ -49,7 +49,7 @@ internal object TabModel {
          */
         MATTER(DayMatterDetailFragment::class.java, R.drawable.ic_matter, R.string.matter),
         CALC(DateCalcFragment::class.java, R.drawable.ic_calc, R.string.calc),
-        SETTING(RemindFragment::class.java, R.drawable.ic_setting, R.string.setting);
+        SETTING(SettingFragment::class.java, R.drawable.ic_setting, R.string.setting);
 
         val fragmentClassName: String
         var drawable: Drawable? = null

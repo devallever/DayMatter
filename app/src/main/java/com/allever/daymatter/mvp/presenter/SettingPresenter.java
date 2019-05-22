@@ -8,15 +8,15 @@ import com.allever.daymatter.receiver.BeforeAlarmReceiver;
 import com.allever.daymatter.receiver.CurrentAlarmReceiver;
 import com.allever.daymatter.utils.RemindUtils;
 import com.allever.daymatter.mvp.BasePresenter;
-import com.allever.daymatter.mvp.view.IRemindView;
+import com.allever.daymatter.mvp.view.ISettingView;
 
 /**
  * Created by Allever on 18/6/1.
  */
 
-public class RemindPresenter extends BasePresenter<IRemindView> {
+public class SettingPresenter extends BasePresenter<ISettingView> {
 
-    private static final String TAG = "RemindPresenter";
+    private static final String TAG = "SettingPresenter";
 
     public void getRemindConfig() {
         Config config = mDataSource.getRemindConfigData();

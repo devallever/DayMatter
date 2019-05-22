@@ -26,7 +26,7 @@ import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.ui.EditDayMatterActivity;
 import com.allever.daymatter.ui.DateCalcFragment;
 import com.allever.daymatter.ui.DayMatterListFragment;
-import com.allever.daymatter.ui.RemindFragment;
+import com.allever.daymatter.ui.SettingFragment;
 import com.allever.daymatter.ui.SortListActivity;
 import com.allever.daymatter.ui.TabModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -132,7 +132,7 @@ public class MainActivity extends
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new DayMatterListFragment());
         mFragmentList.add(new DateCalcFragment());
-        mFragmentList.add(new RemindFragment());
+        mFragmentList.add(new SettingFragment());
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, mFragmentList);
     }
 

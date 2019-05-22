@@ -6,7 +6,7 @@ import com.allever.daymatter.data.Config;
  * Created by Allever on 18/6/1.
  */
 
-public interface IRemindView {
+public interface ISettingView {
     void setCurrentRemindSwitch(boolean value);
     void setCurrentRemindTime(String time);
 
