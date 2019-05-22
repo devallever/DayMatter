@@ -69,6 +69,8 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
 
     @BindView(R.id.id_fg_remind_rl_before_day_remind_about_container)
     ViewGroup mAboutContainer;
+    @BindView(R.id.id_fg_remind_rl_before_day_remind_feedback_container)
+    ViewGroup mFeedbackContainer;
 
 
     //当天提醒时间选择器
@@ -204,7 +206,8 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
             R.id.id_fg_remind_rl_current_day_remind_time_container,
             R.id.id_fg_remind_rl_before_day_switch_container,
             R.id.id_fg_remind_rl_before_day_remind_time_container,
-            R.id.id_fg_remind_rl_before_day_remind_about_container})
+            R.id.id_fg_remind_rl_before_day_remind_about_container,
+            R.id.id_fg_remind_rl_before_day_remind_feedback_container})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //当天提醒
@@ -229,6 +232,9 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
                 break;
             case R.id.id_fg_remind_rl_before_day_remind_about_container:
                 AboutActivity.Companion.actionStart(getActivity());
+                break;
+            case R.id.id_fg_remind_rl_before_day_remind_feedback_container:
+                mPresenter.feedback(getActivity());
                 break;
             default:
                 break;

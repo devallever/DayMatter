@@ -1,11 +1,13 @@
 package com.allever.daymatter.mvp.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.receiver.BeforeAlarmReceiver;
 import com.allever.daymatter.receiver.CurrentAlarmReceiver;
+import com.allever.daymatter.utils.CommonHalper;
 import com.allever.daymatter.utils.RemindUtils;
 import com.allever.daymatter.mvp.BasePresenter;
 import com.allever.daymatter.mvp.view.ISettingView;
@@ -118,5 +120,9 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
             RemindUtils.stopRemind(context, RemindUtils.REQUEST_CODE_BEFORE_REMIND, BeforeAlarmReceiver.class);
         }
 
+    }
+
+    public void feedback(Activity activity) {
+        CommonHalper.INSTANCE.feedback(activity);
     }
 }

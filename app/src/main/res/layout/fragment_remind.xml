@@ -76,6 +76,28 @@
     <include layout="@layout/layout_divider" />
 
     <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_before_day_remind_feedback_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            style="@style/input_day_matter_tv_item_title_style"
+            android:layout_marginLeft="0dp"
+            android:text="@string/feedback"
+            android:layout_marginStart="0dp"
+            android:textColor="@color/black"
+            android:paddingLeft="10dp"/>
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_feedback"
+            android:scaleType="centerInside"/>
+    </RelativeLayout>
+
+    <include layout="@layout/layout_divider" />
+
+    <RelativeLayout
         android:id="@+id/id_fg_remind_rl_before_day_remind_about_container"
         style="@style/input_day_matter_ll_item_container"
         android:visibility="visible">
