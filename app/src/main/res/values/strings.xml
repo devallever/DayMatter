@@ -78,5 +78,8 @@
 	<string name="dialog_default_positive_text">@string/ok</string>
 	<string name="dialog_default_negative_text">@string/cancel</string>
 
+	<string name="about">关于</string>
+	<string name="about_right">版权所有@2018-2019 DayMatters保留所有权利</string>
+
 
 </resources>

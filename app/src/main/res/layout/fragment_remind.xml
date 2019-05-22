@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
 
     <RelativeLayout
         android:id="@+id/id_fg_remind_rl_current_day_switch_container"
@@ -21,6 +24,8 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
+    <include layout="@layout/layout_divider" />
+
     <RelativeLayout
         android:id="@+id/id_fg_remind_rl_current_day_remind_time_container"
         style="@style/input_day_matter_ll_item_container"
@@ -32,6 +37,8 @@
             android:textColor="@color/colorDefault"
             android:drawableLeft="@drawable/ic_edit_title"/>
     </RelativeLayout>
+
+    <include layout="@layout/layout_divider" />
 
     <RelativeLayout
         android:id="@+id/id_fg_remind_rl_before_day_switch_container"
@@ -51,6 +58,8 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
+    <include layout="@layout/layout_divider" />
+
     <RelativeLayout
         android:id="@+id/id_fg_remind_rl_before_day_remind_time_container"
         style="@style/input_day_matter_ll_item_container"
@@ -62,5 +71,30 @@
             android:textColor="@color/colorDefault"
             android:drawableLeft="@drawable/ic_edit_title"/>
     </RelativeLayout>
+
+
+    <include layout="@layout/layout_divider" />
+
+    <RelativeLayout
+        android:id="@+id/id_fg_remind_rl_before_day_remind_about_container"
+        style="@style/input_day_matter_ll_item_container"
+        android:visibility="visible">
+        <TextView
+            style="@style/input_day_matter_tv_item_title_style"
+            android:layout_marginLeft="0dp"
+            android:text="@string/about"
+            android:layout_marginStart="0dp"
+            android:textColor="@color/black"
+            android:paddingLeft="10dp"/>
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_about"
+            android:scaleType="centerInside"/>
+    </RelativeLayout>
+
+    <include layout="@layout/layout_divider" />
 
 </LinearLayout>

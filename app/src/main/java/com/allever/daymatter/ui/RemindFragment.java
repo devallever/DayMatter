@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,10 @@ public class RemindFragment extends BaseFragment<IRemindView, RemindPresenter> i
     //前天提醒时间选项-主要用于设置监听
     @BindView(R.id.id_fg_remind_rl_before_day_remind_time_container)
     RelativeLayout mRlBeforeDayRemindTimeContainer;
+
+    @BindView(R.id.id_fg_remind_rl_before_day_remind_about_container)
+    ViewGroup mAboutContainer;
+
 
     //当天提醒时间选择器
     private TimePickerDialog mCurrentTimePicker;
@@ -198,7 +203,8 @@ public class RemindFragment extends BaseFragment<IRemindView, RemindPresenter> i
     @OnClick({R.id.id_fg_remind_rl_current_day_switch_container,
             R.id.id_fg_remind_rl_current_day_remind_time_container,
             R.id.id_fg_remind_rl_before_day_switch_container,
-            R.id.id_fg_remind_rl_before_day_remind_time_container})
+            R.id.id_fg_remind_rl_before_day_remind_time_container,
+            R.id.id_fg_remind_rl_before_day_remind_about_container})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //当天提醒
@@ -220,6 +226,9 @@ public class RemindFragment extends BaseFragment<IRemindView, RemindPresenter> i
                 if (mBeforeTimePicker != null){
                     mBeforeTimePicker.show();
                 }
+                break;
+            case R.id.id_fg_remind_rl_before_day_remind_about_container:
+                AboutActivity.Companion.actionStart(getActivity());
                 break;
             default:
                 break;

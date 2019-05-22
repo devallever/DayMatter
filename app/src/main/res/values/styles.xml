@@ -27,7 +27,7 @@
 
     <style name="input_day_matter_ll_item_container">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:clickable">true</item>
@@ -37,7 +37,7 @@
     <style name="input_day_matter_tv_item_title_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
