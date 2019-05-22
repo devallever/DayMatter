@@ -13,6 +13,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.allever.daymatter.App;
+import com.allever.demoapp.util.ToastUtil;
 import com.zf.daymatter.R;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DateCalcPresenter;
@@ -78,6 +80,8 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
     private int mDistanceStartMonth;
     private int mDistanceStartDay;
     private int mDistanceStartWeek;
+
+    private static final int MAX_CALC_VALUE = 999999;
 
     @Nullable
     @Override
@@ -204,6 +208,11 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
                 String intervalText = mEtDayAfter.getText().toString();
                 //如果输入框内容不为空，则计算几天后的日期
                 if (!TextUtils.isEmpty(intervalText)){
+                    int value = Integer.valueOf(intervalText);
+                    if (value > MAX_CALC_VALUE) {
+                        ToastUtil.INSTANCE.show("0 - " + MAX_CALC_VALUE);
+                        return;
+                    }
                     int interval = Integer.parseInt(intervalText);
                     mTvDisplayAfter.setText(DateUtils.calDayAfter(getActivity(),
                             mAfterBeforeStartYear,
@@ -227,6 +236,11 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
                 String intervalText = mEtDayBefore.getText().toString();
                 //如果输入框内容不为空，则计算几天后的日期
                 if (!TextUtils.isEmpty(intervalText)){
+                    int value = Integer.valueOf(intervalText);
+                    if (value > MAX_CALC_VALUE) {
+                        ToastUtil.INSTANCE.show("0 - " + MAX_CALC_VALUE);
+                        return;
+                    }
                     int interval = Integer.parseInt(intervalText);
                     mTvDisplayBefore.setText(DateUtils.calDayBefore(getActivity(),
                             mAfterBeforeStartYear,
