@@ -28,7 +28,7 @@ import java.util.Arrays
 import java.util.Locale
 
 import android.view.View.LAYOUT_DIRECTION_RTL
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 
 /**
  * All tab data is accessed via this model.

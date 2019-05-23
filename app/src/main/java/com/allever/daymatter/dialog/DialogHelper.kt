@@ -13,11 +13,10 @@ import android.widget.EditText
 import android.widget.TextView
 import com.allever.daymatter.App
 import com.allever.daymatter.adapter.DialogSortAdapter
-import com.allever.daymatter.bean.ItemSlidMenuSort
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
 import com.allever.daymatter.data.Repository
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 import java.lang.Exception
 
 object DialogHelper{

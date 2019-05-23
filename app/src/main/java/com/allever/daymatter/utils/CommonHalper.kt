@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.allever.daymatter.App
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 
 object CommonHalper {
 

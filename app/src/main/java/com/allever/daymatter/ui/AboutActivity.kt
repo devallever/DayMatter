@@ -6,15 +6,11 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.allever.daymatter.mvp.BaseActivity
 import com.allever.daymatter.mvp.presenter.AboutPresenter
 import com.allever.daymatter.mvp.view.IAboutView
 import com.umeng.analytics.MobclickAgent
-import com.umeng.commonsdk.UMConfigure
-import com.umeng.commonsdk.UMConfigureImpl
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 
 class AboutActivity : BaseActivity<IAboutView, AboutPresenter>(), View.OnClickListener {
 

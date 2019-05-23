@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.utils.Constants;
 
 import butterknife.BindView;

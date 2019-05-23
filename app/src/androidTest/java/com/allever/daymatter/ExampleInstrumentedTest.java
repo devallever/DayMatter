@@ -1,4 +1,4 @@
-package com.zf.daymatter;
+package com.allever.daymatter;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

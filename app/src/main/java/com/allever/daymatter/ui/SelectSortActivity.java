@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.umeng.analytics.MobclickAgent;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.presenter.SelectSortPresenter;
 import com.allever.daymatter.mvp.view.ISelectSortView;

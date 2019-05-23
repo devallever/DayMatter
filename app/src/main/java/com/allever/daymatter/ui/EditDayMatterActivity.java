@@ -28,7 +28,7 @@ import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.mvp.presenter.EditDayMatterPresenter;
 import com.allever.demoapp.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.dialog.RepeatTypeDialog;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.view.IAddDayMatterView;

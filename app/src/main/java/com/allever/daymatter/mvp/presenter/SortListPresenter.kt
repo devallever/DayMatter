@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.support.v7.app.AlertDialog
 import com.allever.daymatter.App
-import com.allever.daymatter.bean.ItemSlidMenuSort
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
 import com.allever.daymatter.dialog.DialogHelper
@@ -12,7 +11,7 @@ import com.allever.daymatter.event.SortEvent
 import com.allever.daymatter.mvp.BasePresenter
 import com.allever.daymatter.mvp.view.ISortListView
 import com.allever.demoapp.util.ToastUtil
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 import org.greenrobot.eventbus.EventBus
 
 class SortListPresenter : BasePresenter<ISortListView>() {

@@ -17,7 +17,7 @@ import com.allever.daymatter.utils.DisplayUtil
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.umeng.analytics.MobclickAgent
 import com.yanzhenjie.recyclerview.*
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 
 class SortListActivity : BaseActivity<ISortListView,
         SortListPresenter>(),

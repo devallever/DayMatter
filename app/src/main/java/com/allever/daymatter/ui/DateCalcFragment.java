@@ -13,10 +13,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.allever.daymatter.App;
 import com.allever.demoapp.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DateCalcPresenter;
 import com.allever.daymatter.mvp.view.IDateCalcView;

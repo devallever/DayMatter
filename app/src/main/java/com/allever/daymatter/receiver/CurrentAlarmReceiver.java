@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.data.DataListener;
 import com.allever.daymatter.data.Event;
 import com.allever.daymatter.data.Repository;

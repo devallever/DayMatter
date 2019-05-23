@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

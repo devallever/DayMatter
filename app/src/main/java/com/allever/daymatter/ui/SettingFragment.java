@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 import com.allever.daymatter.utils.TimeUtils;
 import com.umeng.analytics.MobclickAgent;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.SettingPresenter;

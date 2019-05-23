@@ -3,7 +3,7 @@ package com.allever.daymatter.adapter
 import com.allever.daymatter.data.Event
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.zf.daymatter.R
+import com.allever.daymatter.R
 
 class SortAdapter(data: List<Event.Sort>)
     : BaseQuickAdapter<Event.Sort, BaseViewHolder>(R.layout.item_sort, data) {

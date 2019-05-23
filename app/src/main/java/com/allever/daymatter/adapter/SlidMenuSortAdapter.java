@@ -2,7 +2,7 @@ package com.allever.daymatter.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.bean.ItemSlidMenuSort;
 
 import java.util.List;

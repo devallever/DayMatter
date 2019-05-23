@@ -30,7 +30,7 @@ import com.allever.daymatter.ui.SettingFragment;
 import com.allever.daymatter.ui.SortListActivity;
 import com.allever.daymatter.ui.TabModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.adapter.SlidMenuSortAdapter;
 import com.allever.daymatter.adapter.ViewPagerAdapter;
 import com.allever.daymatter.bean.ItemSlidMenuSort;
@@ -170,7 +170,7 @@ public class MainActivity extends
     }
 
     private void initView() {
-        mToolbar.setTitle(R.string.app_name);
+        mToolbar.setTitle(R.string.matter);
         setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,

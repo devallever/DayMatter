@@ -1,9 +1,8 @@
 package com.allever.daymatter.utils;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

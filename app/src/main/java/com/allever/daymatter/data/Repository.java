@@ -3,7 +3,7 @@ package com.allever.daymatter.data;
 import android.content.Context;
 import android.util.Log;
 
-import com.zf.daymatter.R;
+import com.allever.daymatter.R;
 import com.allever.daymatter.bean.ItemSlidMenuSort;
 
 import org.litepal.crud.DataSupport;
