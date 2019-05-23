@@ -75,8 +75,8 @@ public class BeforeAlarmReceiver extends BroadcastReceiver {
 
             //通知
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
+                    .setSmallIcon(R.drawable.ic_logo)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_logo))
                     .setContentTitle(context.getResources().getString(R.string.app_name))
                     .setContentText(event.getTitle() + ": " + date)
                     .setContentIntent(contentIntent)

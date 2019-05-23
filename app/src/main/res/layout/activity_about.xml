@@ -20,7 +20,7 @@
 		android:layout_below="@id/app_bar_layout"
 		android:layout_centerHorizontal="true"
 		android:layout_marginTop="60dp"
-		android:src="@mipmap/ic_launcher"/>
+		android:src="@drawable/ic_logo"/>
 
 	<TextView
 		android:id="@+id/about_app_name"
