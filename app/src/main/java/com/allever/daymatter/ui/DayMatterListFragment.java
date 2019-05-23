@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.umeng.analytics.MobclickAgent;
 import com.zf.daymatter.R;
 import com.allever.daymatter.adapter.DayMatterListAdapter;
 import com.allever.daymatter.bean.ItemDayMatter;
@@ -79,6 +80,17 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         mPresenter.getDayMatterData(getActivity());
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getActivity());
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getActivity());
     }
 
     private void initView() {

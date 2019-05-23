@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zf.daymatter">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.allever.daymatter.App"
         android:allowBackup="true"
@@ -31,6 +36,10 @@
         <receiver
             android:name="com.allever.daymatter.receiver.CurrentAlarmReceiver"
             />
+
+        <!-- 友盟 -->
+        <meta-data android:value="5cdd4b800cafb24a45000581" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="googleplay" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

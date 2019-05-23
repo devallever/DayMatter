@@ -27,6 +27,7 @@ import com.allever.daymatter.dialog.DialogHelper;
 import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.mvp.presenter.EditDayMatterPresenter;
 import com.allever.demoapp.util.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.zf.daymatter.R;
 import com.allever.daymatter.dialog.RepeatTypeDialog;
 import com.allever.daymatter.mvp.BaseActivity;
@@ -131,6 +132,17 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
         setListener();
 
         //设置事件默认值->
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void initDialog() {

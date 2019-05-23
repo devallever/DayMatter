@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zf.daymatter.R;
 import com.allever.daymatter.bean.ItemDayMatter;
 import com.allever.daymatter.event.EventDayMatter;
@@ -64,6 +65,17 @@ public class DayMatterDetailFragment extends BaseFragment<IDayMatterDetailFgView
         initView();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getActivity());
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getActivity());
     }
 
     private void initView(){

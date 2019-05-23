@@ -11,6 +11,9 @@ import butterknife.ButterKnife
 import com.allever.daymatter.mvp.BaseActivity
 import com.allever.daymatter.mvp.presenter.AboutPresenter
 import com.allever.daymatter.mvp.view.IAboutView
+import com.umeng.analytics.MobclickAgent
+import com.umeng.commonsdk.UMConfigure
+import com.umeng.commonsdk.UMConfigureImpl
 import com.zf.daymatter.R
 
 class AboutActivity : BaseActivity<IAboutView, AboutPresenter>(), View.OnClickListener {
@@ -26,6 +29,16 @@ class AboutActivity : BaseActivity<IAboutView, AboutPresenter>(), View.OnClickLi
         initView()
 
         initToolbar(mToolbar, R.string.about)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this)
     }
 
     private fun initView() {
