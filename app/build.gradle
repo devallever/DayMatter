@@ -12,12 +12,44 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("${rootProject.ext.signingStoreFile}")
+            storePassword "${rootProject.ext.signingStorePassword}"
+            keyAlias "${rootProject.ext.signingKeyAlias}"
+            keyPassword "${rootProject.ext.signingKeyPassword}"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+
+
+    applicationVariants.all {
+        variant ->
+            if (variant.buildType.name.equals('release')) {
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "${defaultConfig.applicationId}_(Release)_V${defaultConfig.versionName}_C${defaultConfig.versionCode}_(Build${releaseTime()}).apk"
+                        output.outputFileName = new File(fileName)
+                        //com.tcqmt.xiaoxue_(Release)_V1.0_C1_(Build201905070905).apk
+                    }
+                }
+            }
+    }
+}
+
+
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("Asia/Chongqing"))
 }
 
 dependencies {

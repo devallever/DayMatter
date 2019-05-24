@@ -1,5 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+ext{
+    signingStoreFile = 'com.allever.daymatter.jks'
+    signingKeyAlias = 'daymatter'
+    signingStorePassword = 'dixm5400'
+    signingKeyPassword = 'dixm5400'
+}
+
 buildscript {
     ext.kotlin_version = '1.2.71'
 
