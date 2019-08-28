@@ -17,7 +17,7 @@
 package com.allever.daymatter.ui.widget.tab;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 

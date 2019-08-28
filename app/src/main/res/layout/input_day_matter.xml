@@ -58,7 +58,7 @@
             style="@style/input_day_matter_tv_item_title_style"
             android:text="@string/set_top"
             android:drawableLeft="@drawable/ic_edit_title"/>
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/id_input_switch_is_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:text="@string/end_date_title"
             android:drawableLeft="@drawable/ic_edit_title"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/id_input_switch_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

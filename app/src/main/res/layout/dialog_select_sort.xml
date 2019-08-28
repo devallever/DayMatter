@@ -19,13 +19,13 @@
         android:paddingLeft="10dp"
         tools:ignore="RtlSymmetry" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/select_sort_rv"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@id/title">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     <View

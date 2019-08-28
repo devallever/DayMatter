@@ -1,7 +1,7 @@
 package com.allever.daymatter.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.umeng.analytics.MobclickAgent;
 import com.allever.daymatter.R;

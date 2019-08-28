@@ -3,9 +3,9 @@ package com.allever.daymatter.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
 import com.allever.daymatter.adapter.SortAdapter
@@ -58,7 +58,7 @@ class SortListActivity : BaseActivity<ISortListView,
     private fun initView() {
         mToolbar = findViewById(R.id.id_toolbar)
         mRvSort = findViewById(R.id.rv_sort_list)
-        mRvSort.layoutManager = LinearLayoutManager(this)
+        mRvSort.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         mRvSort.setOnItemMenuClickListener(this)
 
         val menuCreator = SwipeMenuCreator { leftMenu, rightMenu, position ->

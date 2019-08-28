@@ -51,7 +51,7 @@
 		<!--android:drawableLeft="@drawable/ic_drawer_calculate"-->
 		<!--android:text="Date Calc" />-->
 
-	<android.support.v7.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/id_main_rv_sort"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"

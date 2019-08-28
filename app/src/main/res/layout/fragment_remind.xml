@@ -15,7 +15,7 @@
             android:text="@string/current_day_remind"
             android:drawableLeft="@drawable/ic_edit_title"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/id_fg_remind_switch_current_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:text="@string/before_day_remind"
             android:drawableLeft="@drawable/ic_edit_title"/>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/id_fg_remind_switch_before_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

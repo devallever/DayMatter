@@ -5,17 +5,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/id_modify_day_matter_ll_root">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <include layout="@layout/include_toolbar"/>
 
-        </android.support.design.widget.AppBarLayout>
-    </android.support.design.widget.CoordinatorLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <include layout="@layout/input_day_matter"/>
 

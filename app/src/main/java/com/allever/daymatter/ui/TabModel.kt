@@ -19,8 +19,8 @@ package com.allever.daymatter.ui
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import android.text.TextUtils
 
 import java.util.ArrayList

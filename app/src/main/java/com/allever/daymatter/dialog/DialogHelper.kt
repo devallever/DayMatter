@@ -2,10 +2,10 @@ package com.allever.daymatter.dialog
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.AppCompatButton
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -24,7 +24,7 @@ object DialogHelper{
     fun createSelectSortDialog(activity: Activity, callback: SelectSortCallback?): AlertDialog {
         val dialog = AlertDialog.Builder(activity).create()
         val view = LayoutInflater.from(activity).inflate(R.layout.dialog_select_sort, null)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.select_sort_rv)
+        val recyclerView = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.select_sort_rv)
         val data = mutableListOf<Event.Sort>()
         val adapter = DialogSortAdapter(data)
         adapter.setOnItemClickListener { adapter, view, position ->
@@ -32,7 +32,7 @@ object DialogHelper{
             callback?.onItemClick(position, data.name, data.id, dialog)
         }
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
 
 
         Repository.getIns().getSortData(activity, object : DataListener<List<Event.Sort>> {

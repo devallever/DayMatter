@@ -55,7 +55,7 @@
         android:layout_height="52dp"
         android:layout_below="@+id/separate">
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -68,7 +68,7 @@
             android:textStyle="bold" />
 
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ok"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

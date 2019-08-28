@@ -2,7 +2,7 @@ package com.allever.daymatter.mvp.presenter
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import com.allever.daymatter.App
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
