@@ -6,16 +6,7 @@ import android.os.Bundle;
 import android.os.Process;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,11 +14,10 @@ import android.widget.TextView;
 
 import com.allever.daymatter.event.Event;
 import com.allever.daymatter.event.SortEvent;
-import com.allever.daymatter.ui.EditDayMatterActivity;
 import com.allever.daymatter.ui.DateCalcFragment;
 import com.allever.daymatter.ui.DayMatterListFragment;
 import com.allever.daymatter.ui.SettingFragment;
-import com.allever.daymatter.ui.SortListActivity;
+import com.allever.daymatter.ui.SortFragment;
 import com.allever.daymatter.ui.TabModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.allever.daymatter.ui.adapter.SlidMenuSortAdapter;
@@ -59,22 +49,24 @@ public class MainActivity extends
 
     private static final String TAG = "MainActivity";
 
-    @BindView(R.id.id_toolbar)
-    Toolbar mToolbar;
+//    @BindView(R.id.id_toolbar)
+//    Toolbar mToolbar;
     @BindView(R.id.id_main_vp)
     ViewPager mVp;
-    @BindView(R.id.id_main_drawer_layout)
-    DrawerLayout mDrawerLayout;
-    @BindView(R.id.id_header_main_tv_day_matter)
-    TextView mTvDayMatter;
+//    @BindView(R.id.id_main_drawer_layout)
+//    DrawerLayout mDrawerLayout;
+//    @BindView(R.id.id_header_main_tv_day_matter)
+//    TextView mTvDayMatter;
     //    @BindView(R.id.id_header_main_tv_more)
 //    TextView mTvMore;
 //    @BindView(R.id.id_header_main_tv_date_calc)
 //    TextView mTvDateCalc;
-    @BindView(R.id.id_main_rv_sort)
-    RecyclerView mRvSort;
+//    @BindView(R.id.id_main_rv_sort)
+//    RecyclerView mRvSort;
     @BindView(R.id.tab_layout)
     TabLayout mTab;
+    @BindView(R.id.tv_label)
+    TextView mTvTitle;
 
 
     private ViewPagerAdapter mViewPagerAdapter;
@@ -100,6 +92,9 @@ public class MainActivity extends
         EventBus.getDefault().register(this);
 
         ButterKnife.bind(this);
+
+        findViewById(R.id.iv_back).setVisibility(View.GONE);
+        mTvTitle.setText(R.string.app_name);
 
         //如果是第一次启动，则向数据库添加默认的数据
         mPresenter.initDefaultSortData(this);
@@ -130,6 +125,7 @@ public class MainActivity extends
     private void initViewPagerData() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new DayMatterListFragment());
+        mFragmentList.add(new SortFragment());
         mFragmentList.add(new DateCalcFragment());
         mFragmentList.add(new SettingFragment());
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, mFragmentList);
@@ -138,8 +134,8 @@ public class MainActivity extends
     private void initSliceMenuSort() {
         mItemSlidMenuSortList = new ArrayList<>();
         mSlidMenuSortAdapter = new SlidMenuSortAdapter(mItemSlidMenuSortList);
-        mRvSort.setLayoutManager(new LinearLayoutManager(this));
-        mRvSort.setAdapter(mSlidMenuSortAdapter);
+//        mRvSort.setLayoutManager(new LinearLayoutManager(this));
+//        mRvSort.setAdapter(mSlidMenuSortAdapter);
 
         //侧滑菜单中的RecyclerView列表设置监听
         mSlidMenuSortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -150,7 +146,7 @@ public class MainActivity extends
                 //viewpager切换到首页
                 mPageIndex = 0;
                 mVp.setCurrentItem(mPageIndex);
-                mDrawerLayout.closeDrawers();
+//                mDrawerLayout.closeDrawers();
 
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -169,28 +165,28 @@ public class MainActivity extends
     }
 
     private void initView() {
-        mToolbar.setTitle(R.string.matter);
-        setSupportActionBar(mToolbar);
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                mDrawerLayout,
-                mToolbar,
-                R.string.app_name,
-                R.string.app_name) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                Log.d(TAG, "onDrawerClosed: position = " + mPageIndex);
-
-                //如果页面下标小于页面数，则允许切换页面，避免索引号异常
-                if (mPageIndex < mFragmentList.size()) {
-                    mVp.setCurrentItem(mPageIndex);
-                }
-            }
-        };
+//        mToolbar.setTitle(R.string.matter);
+//        setSupportActionBar(mToolbar);
+//
+//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
+//                mDrawerLayout,
+//                mToolbar,
+//                R.string.app_name,
+//                R.string.app_name) {
+//            @Override
+//            public void onDrawerClosed(View drawerView) {
+//                Log.d(TAG, "onDrawerClosed: position = " + mPageIndex);
+//
+//                //如果页面下标小于页面数，则允许切换页面，避免索引号异常
+//                if (mPageIndex < mFragmentList.size()) {
+//                    mVp.setCurrentItem(mPageIndex);
+//                }
+//            }
+//        };
 //        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
-
-        //要不要这个侧滑菜单栏的动画效果都无所谓了。
-        actionBarDrawerToggle.syncState();
+//
+//        要不要这个侧滑菜单栏的动画效果都无所谓了。
+//        actionBarDrawerToggle.syncState();
 
         mVp.setAdapter(mViewPagerAdapter);
 
@@ -204,13 +200,16 @@ public class MainActivity extends
                 //页面切换时，更改Toolbar标题
                 switch (position) {
                     case 0:
-                        mToolbar.setTitle(getString(R.string.matter));
+                        mTvTitle.setText(getString(R.string.matter));
                         break;
                     case 1:
-                        mToolbar.setTitle(getString(R.string.calc));
+                        mTvTitle.setText(getString(R.string.sort));
                         break;
                     case 2:
-                        mToolbar.setTitle(getString(R.string.setting));
+                        mTvTitle.setText(getString(R.string.calc));
+                        break;
+                    case 3:
+                        mTvTitle.setText(getString(R.string.setting));
                         break;
                     default:
                         break;
@@ -256,8 +255,6 @@ public class MainActivity extends
         mTab.setSelectedTabIndicatorWidth(DisplayUtil.INSTANCE.dip2px(0));
         mTab.setSelectedTabIndicatorHeight(DisplayUtil.INSTANCE.dip2px(0));
         mTab.setSelectedTabIndicatorColor(mainTabHighlight);
-
-
     }
 
     @Override
@@ -292,65 +289,65 @@ public class MainActivity extends
     }
 
 
-    @OnClick({R.id.id_header_main_tv_day_matter,
-//            R.id.id_header_main_tv_more,
-//            R.id.id_header_main_tv_date_calc,
-//            R.id.id_header_main_tv_remind,
-            R.id.id_header_main_tv_sort})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.id_header_main_tv_day_matter:
-                mPageIndex = 0;
-                mDrawerLayout.closeDrawers();
-                break;
-//            case R.id.id_header_main_tv_date_calc:
-//                mPageIndex = 1;
-//                mDrawerLayout.closeDrawers();
+//    @OnClick({R.id.id_header_main_tv_day_matter,
+////            R.id.id_header_main_tv_more,
+////            R.id.id_header_main_tv_date_calc,
+////            R.id.id_header_main_tv_remind,
+//            R.id.id_header_main_tv_sort})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.id_header_main_tv_day_matter:
+//                mPageIndex = 0;
+////                mDrawerLayout.closeDrawers();
 //                break;
-//            case R.id.id_header_main_tv_remind:
-//                mPageIndex = 2;
-//                mDrawerLayout.closeDrawers();
+////            case R.id.id_header_main_tv_date_calc:
+////                mPageIndex = 1;
+////                mDrawerLayout.closeDrawers();
+////                break;
+////            case R.id.id_header_main_tv_remind:
+////                mPageIndex = 2;
+////                mDrawerLayout.closeDrawers();
+////                break;
+////            case R.id.id_header_main_tv_more:
+////                mPageIndex = 3;
+////                mDrawerLayout.closeDrawers();
+////                break;
+//            case R.id.id_header_main_tv_sort:
+//                SortListActivity.Companion.actionStart(MainActivity.this);
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        mDrawerLayout.closeDrawers();
+//                    }
+//                }, 500);
 //                break;
-//            case R.id.id_header_main_tv_more:
-//                mPageIndex = 3;
-//                mDrawerLayout.closeDrawers();
+//            default:
 //                break;
-            case R.id.id_header_main_tv_sort:
-                SortListActivity.Companion.actionStart(MainActivity.this);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDrawerLayout.closeDrawers();
-                    }
-                }, 500);
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.id_menu_main_add:
-                EditDayMatterActivity.startSelf(this, false, -1);
-                break;
-//            case R.id.id_menu_main_style:
-//                showToast("Style");
+//        }
+//    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        switch (id) {
+//            case R.id.id_menu_main_add:
+//                EditDayMatterActivity.startSelf(this, false, -1);
 //                break;
-            default:
-                break;
-        }
-        return true;
-    }
+////            case R.id.id_menu_main_style:
+////                showToast("Style");
+////                break;
+//            default:
+//                break;
+//        }
+//        return true;
+//    }
 
     @Override
     public void setSlidMenuSort(List<ItemSlidMenuSort> itemSlidMenuSortList) {
@@ -367,10 +364,6 @@ public class MainActivity extends
 
     @Override
     public void onBackPressed() {
-//        ExitDialog exitDialog = new ExitDialog(this);
-//        exitDialog.setExitListener(this);
-//        exitDialog.show();
-
         long currentTime = System.currentTimeMillis();
         if (mPrevClickBackTime == -1 || currentTime - mPrevClickBackTime > 3000) {
             mPrevClickBackTime = currentTime;
@@ -393,6 +386,10 @@ public class MainActivity extends
             case Constants.EVENT_DELETE_DAY_MATTER:
             case Constants.EVENT_ADD_DAY_MATTER:
                 mPresenter.getSlideMenuSortData(this);
+                break;
+            case Constants.EVENT_SELECT_DISPLAY_SORT_LIST:
+                mVp.setCurrentItem(0);
+                mTvTitle.setText(getString(R.string.matter) + "." + event.getName());
                 break;
             default:
                 break;

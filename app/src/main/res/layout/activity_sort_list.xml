@@ -4,21 +4,10 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/app_bar_layout"
-		android:layout_width="match_parent"
-		android:layout_height="?actionBarSize"
-		>
-
-		<include layout="@layout/include_toolbar"/>
-
-	</com.google.android.material.appbar.AppBarLayout>
-
 	<com.yanzhenjie.recyclerview.SwipeRecyclerView
 		android:id="@+id/rv_sort_list"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@id/app_bar_layout"/>
+		android:layout_height="match_parent"/>
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/id_btn_add_sort"

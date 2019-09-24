@@ -4,6 +4,8 @@
     <color name="colorPrimary">#2196f3</color>
     <color name="colorPrimaryDark">#2196f3</color>
     <color name="colorAccent">#2196f3</color>
+    <color name="default_gray">#eeeeee</color>
+    <color name="default_gray_alpha">#aaeeeeee</color>
 
     <color name="colorDefault">#2196f3</color>
 
@@ -23,6 +25,19 @@
 
     <color name="sort_list_menu_modify_color">#aaaaaa</color>
     <color name="sort_list_menu_delete_color">@color/red</color>
+
+    <!-- default -->
+
+    <color name="default_theme_color">@color/colorPrimary</color>
+    <color name="default_background">@color/white</color>
+    <color name="default_top_bar_background_color">@color/default_gray</color>
+    <color name="default_icon_color_filter">@color/black</color>
+    <color name="default_btn_color_filter">#ff000000</color>
+    <color name="default_btn_background">@color/default_gray_alpha</color>
+    <color name="default_tv_color">@color/black</color>
+
+    <!-- 分割线 -->
+    <color name="dividing_line_color">#26ffffff</color>
 
 
 </resources>

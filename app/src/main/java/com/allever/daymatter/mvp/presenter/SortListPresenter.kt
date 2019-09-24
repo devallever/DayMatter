@@ -31,7 +31,7 @@ class SortListPresenter : BasePresenter<ISortListView>() {
         })
     }
 
-    fun addSort(activity: Activity) {
+    fun addSort(activity: Context) {
         val dialogBuilder = DialogHelper.Builder()
         dialogBuilder.title = App.context.resources.getString(R.string.add_sort)
         dialogBuilder.isShowMessage(false)

@@ -8,6 +8,7 @@ public class EventDayMatter {
     private String event;
     private int sortId;
     private int eventId;
+    private String name;
 
     public String getEvent() {
         return event;
@@ -31,5 +32,13 @@ public class EventDayMatter {
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

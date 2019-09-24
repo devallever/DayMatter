@@ -1,56 +1,58 @@
 package com.allever.daymatter.ui
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.appcompat.widget.Toolbar
+import android.os.Handler
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.allever.daymatter.ui.adapter.SortAdapter
+import com.allever.daymatter.R
 import com.allever.daymatter.data.Event
-import com.allever.daymatter.mvp.BaseActivity
+import com.allever.daymatter.event.EventDayMatter
+import com.allever.daymatter.mvp.BaseFragment
 import com.allever.daymatter.mvp.presenter.SortListPresenter
 import com.allever.daymatter.mvp.view.ISortListView
+import com.allever.daymatter.ui.adapter.SortAdapter
+import com.allever.daymatter.utils.Constants
 import com.allever.daymatter.utils.DisplayUtil
+import com.allever.lib.common.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.yanzhenjie.recyclerview.*
-import com.allever.daymatter.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.yanzhenjie.recyclerview.OnItemMenuClickListener
+import com.yanzhenjie.recyclerview.SwipeMenuBridge
+import com.yanzhenjie.recyclerview.SwipeMenuCreator
+import com.yanzhenjie.recyclerview.SwipeMenuItem
+import com.yanzhenjie.recyclerview.SwipeRecyclerView
+import org.greenrobot.eventbus.EventBus
 
-class SortListActivity : BaseActivity<ISortListView,
+class SortFragment: BaseFragment<ISortListView,
         SortListPresenter>(),
         ISortListView,
         OnItemMenuClickListener,
-        BaseQuickAdapter.OnItemChildClickListener, View.OnClickListener {
+        BaseQuickAdapter.OnItemChildClickListener, View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
 
     private lateinit var mRvSort: SwipeRecyclerView
     private lateinit var mAdapter: SortAdapter
     private var mSortData = mutableListOf<Event.Sort>()
-    private lateinit var mToolbar: Toolbar
     private lateinit var mBtnAddSort: FloatingActionButton
+    private lateinit var mView: View
+    private val mHandler = Handler()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sort_list)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        mView = LayoutInflater.from(activity).inflate(R.layout.activity_sort_list, container, false)
         initData()
-
         initView()
-
-        initToolbar(mToolbar, R.string.sort_manage)
-
-        mPresenter.getSlideMenuSortData(this)
-
+        mPresenter.getSlideMenuSortData(context!!)
+        return mView
     }
 
     private fun initView() {
-        mToolbar = findViewById(R.id.id_toolbar)
-        mRvSort = findViewById(R.id.rv_sort_list)
-        mRvSort.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        mRvSort = mView.findViewById(R.id.rv_sort_list)
+        mRvSort.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         mRvSort.setOnItemMenuClickListener(this)
 
         val menuCreator = SwipeMenuCreator { leftMenu, rightMenu, position ->
-            val modifyItem = SwipeMenuItem(this)
+            val modifyItem = SwipeMenuItem(activity)
             modifyItem.text = getString(R.string.sort_list_menu_modify)
             modifyItem.setTextColor(resources.getColor(R.color.white))
             modifyItem.setBackgroundColor(resources.getColor(R.color.sort_list_menu_modify_color))
@@ -58,7 +60,7 @@ class SortListActivity : BaseActivity<ISortListView,
             modifyItem.width = DisplayUtil.dip2px(60)
             rightMenu.addMenuItem(modifyItem)
 
-            val deleteItem = SwipeMenuItem(this)
+            val deleteItem = SwipeMenuItem(activity)
             deleteItem.text = getString(R.string.sort_list_menu_delete)
             deleteItem.setTextColor(resources.getColor(R.color.white))
             deleteItem.setBackgroundColor(resources.getColor(R.color.sort_list_menu_delete_color))
@@ -70,7 +72,7 @@ class SortListActivity : BaseActivity<ISortListView,
         mRvSort.setSwipeMenuCreator(menuCreator)
         mRvSort.adapter = mAdapter
 
-        mBtnAddSort = findViewById(R.id.id_btn_add_sort)
+        mBtnAddSort = mView.findViewById(R.id.id_btn_add_sort)
         mBtnAddSort.setOnClickListener(this)
 
     }
@@ -78,14 +80,26 @@ class SortListActivity : BaseActivity<ISortListView,
     private fun initData() {
         mAdapter = SortAdapter(mSortData)
         mAdapter.onItemChildClickListener = this
+        mAdapter.onItemClickListener = this
     }
 
     override fun createPresenter(): SortListPresenter = SortListPresenter()
 
+    override fun setSortData(data: List<Event.Sort>) {
+        mSortData.clear()
+        mSortData.addAll(data)
+        mAdapter.notifyDataSetChanged()
+    }
 
-    /***
-     * MenuItem回调
-     */
+    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+        ToastUtils.show(mSortData[position].name)
+        val event = EventDayMatter()
+        event.event = Constants.EVENT_SELECT_DISPLAY_SORT_LIST
+        event.sortId = mSortData[position].id
+        event.name = mSortData[position].name
+        EventBus.getDefault().post(event)
+    }
+
     override fun onItemClick(menuBridge: SwipeMenuBridge?, adapterPosition: Int) {
         menuBridge?.closeMenu()
         val menuIndex = menuBridge?.position
@@ -96,19 +110,15 @@ class SortListActivity : BaseActivity<ISortListView,
 
         if (menuBridge?.position == 0) {
             mHandler.postDelayed({
-                mPresenter.modifySort(this, mSortData[adapterPosition])
+                mPresenter.modifySort(activity!!, mSortData[adapterPosition])
             }, 200)
         } else if (menuBridge?.position == 1) {
             mHandler.postDelayed({
-                mPresenter.deleteSort(this, mSortData[adapterPosition])
+                mPresenter.deleteSort(activity!!, mSortData[adapterPosition])
             }, 200)
         }
-
     }
 
-    /***
-     * Rv Adapter item child回调
-     */
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
         when (view?.id) {
             R.id.id_item_slid_sort_iv_type -> {
@@ -117,30 +127,11 @@ class SortListActivity : BaseActivity<ISortListView,
         }
     }
 
-    /***
-     * 点击事件回调
-     */
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_btn_add_sort -> {
-                mPresenter.addSort(this)
+                mPresenter.addSort(context!!)
             }
         }
-    }
-
-
-    override fun setSortData(data: List<Event.Sort>) {
-        mSortData.clear()
-        mSortData.addAll(data)
-        mAdapter.notifyDataSetChanged()
-    }
-
-
-    companion object {
-        fun start(context: Context?) {
-            val intent = Intent(context, SortListActivity::class.java)
-            context?.startActivity(intent)
-        }
-
     }
 }
