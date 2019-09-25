@@ -92,7 +92,6 @@ class SortFragment: BaseFragment<ISortListView,
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-        ToastUtils.show(mSortData[position].name)
         val event = EventDayMatter()
         event.event = Constants.EVENT_SELECT_DISPLAY_SORT_LIST
         event.sortId = mSortData[position].id

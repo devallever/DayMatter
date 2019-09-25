@@ -2,11 +2,13 @@ package com.allever.daymatter.mvp.presenter;
 
 import android.content.Context;
 
+import com.allever.daymatter.R;
 import com.allever.daymatter.bean.ItemSlidMenuSort;
 import com.allever.daymatter.data.DataListener;
 import com.allever.daymatter.utils.SPUtils;
 import com.allever.daymatter.mvp.BasePresenter;
 import com.allever.daymatter.mvp.view.IMainActivityView;
+import com.allever.lib.common.app.App;
 
 import java.util.List;
 
@@ -15,6 +17,9 @@ import java.util.List;
  */
 
 public class MainActivityPresenter extends BasePresenter<IMainActivityView> {
+
+    private String mAppName = App.context.getString(R.string.matter);
+    private String mCurrentSortName = App.context.getString(R.string.all);
 
     public void getSlideMenuSortData(Context context) {
         //List<ItemSlidMenuSort> list  = mDataSource.getSlidMenuSortData(context);
@@ -38,5 +43,14 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> {
             mDataSource.addDefaultSortData(context);
             mDataSource.addDefaultConfig();
         }
+    }
+
+    public void updateTitle() {
+        mViewRef.get().updateTitle(mAppName + "." + mCurrentSortName);
+    }
+
+    public void updateTitle(String sortName) {
+        mCurrentSortName = sortName;
+        updateTitle();
     }
 }

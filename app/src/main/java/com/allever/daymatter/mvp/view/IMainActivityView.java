@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface IMainActivityView {
     void setSlidMenuSort(List<ItemSlidMenuSort> itemSlidMenuSortList);
+    void updateTitle(String title);
 }

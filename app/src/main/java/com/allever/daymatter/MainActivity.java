@@ -40,29 +40,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends
         BaseActivity<IMainActivityView,
                 MainActivityPresenter>
         implements IMainActivityView, TabLayout.OnTabSelectedListener {
 
-    private static final String TAG = "MainActivity";
-
-//    @BindView(R.id.id_toolbar)
-//    Toolbar mToolbar;
     @BindView(R.id.id_main_vp)
     ViewPager mVp;
-//    @BindView(R.id.id_main_drawer_layout)
-//    DrawerLayout mDrawerLayout;
-//    @BindView(R.id.id_header_main_tv_day_matter)
-//    TextView mTvDayMatter;
-    //    @BindView(R.id.id_header_main_tv_more)
-//    TextView mTvMore;
-//    @BindView(R.id.id_header_main_tv_date_calc)
-//    TextView mTvDateCalc;
-//    @BindView(R.id.id_main_rv_sort)
-//    RecyclerView mRvSort;
     @BindView(R.id.tab_layout)
     TabLayout mTab;
     @BindView(R.id.tv_label)
@@ -80,6 +65,7 @@ public class MainActivity extends
     private int mPageIndex = 0;
 
     private int mSortId = 0;
+    private String mCurrentSortName;
 
     private int mainTabHighlight = 0;
     private int mainTabUnselectColor = 0;
@@ -94,7 +80,7 @@ public class MainActivity extends
         ButterKnife.bind(this);
 
         findViewById(R.id.iv_back).setVisibility(View.GONE);
-        mTvTitle.setText(R.string.app_name);
+        mPresenter.updateTitle();
 
         //如果是第一次启动，则向数据库添加默认的数据
         mPresenter.initDefaultSortData(this);
@@ -200,7 +186,7 @@ public class MainActivity extends
                 //页面切换时，更改Toolbar标题
                 switch (position) {
                     case 0:
-                        mTvTitle.setText(getString(R.string.matter));
+                        mPresenter.updateTitle();
                         break;
                     case 1:
                         mTvTitle.setText(getString(R.string.sort));
@@ -360,6 +346,11 @@ public class MainActivity extends
         mSlidMenuSortAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void updateTitle(String title) {
+        mTvTitle.setText(title);
+    }
+
     private long mPrevClickBackTime = -1;
 
     @Override
@@ -388,8 +379,8 @@ public class MainActivity extends
                 mPresenter.getSlideMenuSortData(this);
                 break;
             case Constants.EVENT_SELECT_DISPLAY_SORT_LIST:
-                mVp.setCurrentItem(0);
-                mTvTitle.setText(getString(R.string.matter) + "." + event.getName());
+                mVp.setCurrentItem(0, true);
+                mPresenter.updateTitle(event.getName());
                 break;
             default:
                 break;
