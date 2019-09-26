@@ -19,8 +19,6 @@ import com.allever.daymatter.ui.DayMatterListFragment;
 import com.allever.daymatter.ui.SettingFragment;
 import com.allever.daymatter.ui.SortFragment;
 import com.allever.daymatter.ui.TabModel;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.allever.daymatter.ui.adapter.SlidMenuSortAdapter;
 import com.allever.daymatter.ui.adapter.ViewPagerAdapter;
 import com.allever.daymatter.bean.ItemSlidMenuSort;
 import com.allever.daymatter.event.EventDayMatter;
@@ -58,15 +56,6 @@ public class MainActivity extends
 
     private List<Fragment> mFragmentList;
 
-    private SlidMenuSortAdapter mSlidMenuSortAdapter;
-
-    private List<ItemSlidMenuSort> mItemSlidMenuSortList;
-
-    private int mPageIndex = 0;
-
-    private int mSortId = 0;
-    private String mCurrentSortName;
-
     private int mainTabHighlight = 0;
     private int mainTabUnselectColor = 0;
 
@@ -87,12 +76,6 @@ public class MainActivity extends
 
         //初始化ViewPager数据
         initViewPagerData();
-
-        //初始化侧滑菜单分类列表数据
-        initSliceMenuSort();
-
-        //获取侧滑菜单分类列表数据
-        mPresenter.getSlideMenuSortData(this);
 
         initView();
     }
@@ -117,63 +100,7 @@ public class MainActivity extends
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, mFragmentList);
     }
 
-    private void initSliceMenuSort() {
-        mItemSlidMenuSortList = new ArrayList<>();
-        mSlidMenuSortAdapter = new SlidMenuSortAdapter(mItemSlidMenuSortList);
-//        mRvSort.setLayoutManager(new LinearLayoutManager(this));
-//        mRvSort.setAdapter(mSlidMenuSortAdapter);
-
-        //侧滑菜单中的RecyclerView列表设置监听
-        mSlidMenuSortAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mSortId = mItemSlidMenuSortList.get(position).getId();
-
-                //viewpager切换到首页
-                mPageIndex = 0;
-                mVp.setCurrentItem(mPageIndex);
-//                mDrawerLayout.closeDrawers();
-
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //发送消息事件通知更新列表，带sortId
-                        EventDayMatter eventDayMatter = new EventDayMatter();
-                        eventDayMatter.setEvent(Constants.EVENT_SELECT_DISPLAY_SORT_LIST);
-                        eventDayMatter.setSortId(mSortId);
-                        EventBus.getDefault().post(eventDayMatter);
-                        mVp.setCurrentItem(mPageIndex);
-                    }
-                }, 500);
-
-            }
-        });
-    }
-
     private void initView() {
-//        mToolbar.setTitle(R.string.matter);
-//        setSupportActionBar(mToolbar);
-//
-//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-//                mDrawerLayout,
-//                mToolbar,
-//                R.string.app_name,
-//                R.string.app_name) {
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                Log.d(TAG, "onDrawerClosed: position = " + mPageIndex);
-//
-//                //如果页面下标小于页面数，则允许切换页面，避免索引号异常
-//                if (mPageIndex < mFragmentList.size()) {
-//                    mVp.setCurrentItem(mPageIndex);
-//                }
-//            }
-//        };
-//        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
-//
-//        要不要这个侧滑菜单栏的动画效果都无所谓了。
-//        actionBarDrawerToggle.syncState();
-
         mVp.setAdapter(mViewPagerAdapter);
 
         mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -274,78 +201,6 @@ public class MainActivity extends
 
     }
 
-
-//    @OnClick({R.id.id_header_main_tv_day_matter,
-////            R.id.id_header_main_tv_more,
-////            R.id.id_header_main_tv_date_calc,
-////            R.id.id_header_main_tv_remind,
-//            R.id.id_header_main_tv_sort})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.id_header_main_tv_day_matter:
-//                mPageIndex = 0;
-////                mDrawerLayout.closeDrawers();
-//                break;
-////            case R.id.id_header_main_tv_date_calc:
-////                mPageIndex = 1;
-////                mDrawerLayout.closeDrawers();
-////                break;
-////            case R.id.id_header_main_tv_remind:
-////                mPageIndex = 2;
-////                mDrawerLayout.closeDrawers();
-////                break;
-////            case R.id.id_header_main_tv_more:
-////                mPageIndex = 3;
-////                mDrawerLayout.closeDrawers();
-////                break;
-//            case R.id.id_header_main_tv_sort:
-//                SortListActivity.Companion.actionStart(MainActivity.this);
-//                mHandler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        mDrawerLayout.closeDrawers();
-//                    }
-//                }, 500);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        switch (id) {
-//            case R.id.id_menu_main_add:
-//                EditDayMatterActivity.startSelf(this, false, -1);
-//                break;
-////            case R.id.id_menu_main_style:
-////                showToast("Style");
-////                break;
-//            default:
-//                break;
-//        }
-//        return true;
-//    }
-
-    @Override
-    public void setSlidMenuSort(List<ItemSlidMenuSort> itemSlidMenuSortList) {
-        if (itemSlidMenuSortList == null) {
-            return;
-        }
-
-        mItemSlidMenuSortList.clear();
-        mItemSlidMenuSortList.addAll(itemSlidMenuSortList);
-        mSlidMenuSortAdapter.notifyDataSetChanged();
-    }
-
     @Override
     public void updateTitle(String title) {
         mTvTitle.setText(title);
@@ -376,7 +231,7 @@ public class MainActivity extends
             case Constants.EVENT_MODIFY_DAY_MATTER:
             case Constants.EVENT_DELETE_DAY_MATTER:
             case Constants.EVENT_ADD_DAY_MATTER:
-                mPresenter.getSlideMenuSortData(this);
+//                mPresenter.getSlideMenuSortData(this);
                 break;
             case Constants.EVENT_SELECT_DISPLAY_SORT_LIST:
                 mVp.setCurrentItem(0, true);
@@ -391,7 +246,7 @@ public class MainActivity extends
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventReceive(Event event) {
         if (event instanceof SortEvent) {
-            mPresenter.getSlideMenuSortData(this);
+//            mPresenter.getSlideMenuSortData(this);
         }
 
     }
