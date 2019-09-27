@@ -68,7 +68,8 @@
 		android:drawablePadding="10dp"
 		android:padding="5dp"
 		android:textSize="12sp"
-		android:gravity="center"/>
+		android:gravity="center"
+		android:visibility="gone"/>
 
 
 </RelativeLayout>
