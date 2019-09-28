@@ -36,6 +36,9 @@
         <receiver
             android:name="com.allever.daymatter.receiver.CurrentAlarmReceiver"
             />
+        <receiver
+            android:name="com.allever.daymatter.receiver.BeforeAlarmReceiver"
+            />
 
         <!-- 友盟 -->
         <meta-data
