@@ -56,6 +56,9 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
     @BindView(R.id.id_fg_date_cal_tv_start_distance_day)
     TextView mTvStartDistanceDay;
 
+    @BindView(R.id.id_fg_date_cal_tv_left_or_already)
+    TextView mTvLeftAlready;
+
     //显示间隔天数
     @BindView(R.id.id_fg_date_cal_tv_display_distance_count)
     TextView mTvDisplayDistanceCount;
@@ -183,7 +186,16 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
                 mTvStartDistanceDay.setText(display);
 
                 //2.重新计算间隔天数
-                mTvDisplayDistanceCount.setText(DateUtils.calDistanceDayCount(mDistanceStartYear,mDistanceStartMonth,mDistanceStartDay) + "");
+                int days = DateUtils.calDistanceDayCount(mDistanceStartYear,mDistanceStartMonth,mDistanceStartDay);
+                if (days < 0) {
+                    days = Math.abs(days);
+                    mTvLeftAlready.setText(R.string.already);
+                    mTvDisplayDistanceCount.setText(days + "");
+                } else {
+                    mTvLeftAlready.setText(R.string.left);
+                    mTvDisplayDistanceCount.setText(days + "");
+                }
+
             }
         }, mDistanceStartYear, mDistanceStartMonth, mDistanceStartDay);
     }
