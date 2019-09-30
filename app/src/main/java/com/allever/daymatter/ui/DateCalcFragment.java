@@ -27,7 +27,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by Allever on 18/5/21.
+ *
+ * @author Allever
+ * @date 18/5/21
  */
 
 public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresenter> implements IDateCalcView {
@@ -137,76 +139,67 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
 
     private void initDialog(){
         //几天前几天后的日历选择器
-        mAfterBeforeStartDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                //1.刷新界面
-                //重新赋值
-                mAfterBeforeCalendar.set(year,month,dayOfMonth);
-                mAfterBeforeStartYear = year;
-                mAfterBeforeStartMonth = month;
-                mAfterBeforeStartDay = dayOfMonth;
+        mAfterBeforeStartDatePicker = new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
+            //1.刷新界面
+            //重新赋值
+            mAfterBeforeCalendar.set(year,month,dayOfMonth);
+            mAfterBeforeStartYear = year;
+            mAfterBeforeStartMonth = month;
+            mAfterBeforeStartDay = dayOfMonth;
 
-                int week = mAfterBeforeCalendar.get(Calendar.DAY_OF_WEEK);
+            int week = mAfterBeforeCalendar.get(Calendar.DAY_OF_WEEK);
 
-                String display = DateUtils.formatDate_Y_M_D_WEEK_New(getActivity(),year,month,dayOfMonth,week);
-                mTvStartBeforeAfterDay.setText(display);
+            String display = DateUtils.formatDate_Y_M_D_WEEK_New(getActivity(),year,month,dayOfMonth,week);
+            mTvStartBeforeAfterDay.setText(display);
 
-                //2.重新计算几天后
-                String intervalAfterText = mEtDayAfter.getText().toString();
-                //如果输入框内容不为空，则计算几天后的日期
-                if (!TextUtils.isEmpty(intervalAfterText)){
-                    int interval = Integer.parseInt(intervalAfterText);
-                    mTvDisplayAfter.setText(DateUtils.calDayAfter(getActivity(), year,month+1, dayOfMonth, interval));
-                }
+            //2.重新计算几天后
+            String intervalAfterText = mEtDayAfter.getText().toString();
+            //如果输入框内容不为空，则计算几天后的日期
+            if (!TextUtils.isEmpty(intervalAfterText)){
+                int interval = Integer.parseInt(intervalAfterText);
+                mTvDisplayAfter.setText(DateUtils.calDayAfter(getActivity(), year,month+1, dayOfMonth, interval));
+            }
 
-                //3.重新计算几天前
-                String intervalBeforeText = mEtDayBefore.getText().toString();
-                //如果输入框内容不为空，则计算几天后的日期
-                if (!TextUtils.isEmpty(intervalBeforeText)){
-                    int interval = Integer.parseInt(intervalBeforeText);
-                    mTvDisplayBefore.setText(DateUtils.calDayBefore(getActivity(), year,month+1, dayOfMonth, interval));
-                }
+            //3.重新计算几天前
+            String intervalBeforeText = mEtDayBefore.getText().toString();
+            //如果输入框内容不为空，则计算几天后的日期
+            if (!TextUtils.isEmpty(intervalBeforeText)){
+                int interval = Integer.parseInt(intervalBeforeText);
+                mTvDisplayBefore.setText(DateUtils.calDayBefore(getActivity(), year,month+1, dayOfMonth, interval));
             }
         },mAfterBeforeStartYear, mAfterBeforeStartMonth, mAfterBeforeStartDay);
 
         //计算间隔天数的日历选择器
-        mDistanceStartDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                //1.刷新界面
-                mDistanceCalendar.set(year,month,dayOfMonth);
-                mDistanceStartYear = year;
-                mDistanceStartMonth = month;
-                mDistanceStartDay = dayOfMonth;
+        mDistanceStartDatePicker = new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
+            //1.刷新界面
+            mDistanceCalendar.set(year,month,dayOfMonth);
+            mDistanceStartYear = year;
+            mDistanceStartMonth = month;
+            mDistanceStartDay = dayOfMonth;
 
-                int week = mDistanceCalendar.get(Calendar.DAY_OF_WEEK);
+            int week = mDistanceCalendar.get(Calendar.DAY_OF_WEEK);
 
-                String display = DateUtils.formatDate_Y_M_D_WEEK(getActivity(),year,month+1,dayOfMonth,week);
-                mTvStartDistanceDay.setText(display);
+            String display = DateUtils.formatDate_Y_M_D_WEEK(getActivity(),year,month+1,dayOfMonth,week);
+            mTvStartDistanceDay.setText(display);
 
-                //2.重新计算间隔天数
-                int days = DateUtils.calDistanceDayCount(mDistanceStartYear,mDistanceStartMonth,mDistanceStartDay);
-                if (days < 0) {
-                    days = Math.abs(days);
-                    mTvLeftAlready.setText(R.string.already);
-                    mTvDisplayDistanceCount.setText(days + "");
-                } else {
-                    mTvLeftAlready.setText(R.string.left);
-                    mTvDisplayDistanceCount.setText(days + "");
-                }
-
+            //2.重新计算间隔天数
+            int days = DateUtils.calDistanceDayCount(mDistanceStartYear,mDistanceStartMonth,mDistanceStartDay);
+            if (days < 0) {
+                days = Math.abs(days);
+                mTvLeftAlready.setText(R.string.already);
+                mTvDisplayDistanceCount.setText(days + "");
+            } else {
+                mTvLeftAlready.setText(R.string.left);
+                mTvDisplayDistanceCount.setText(days + "");
             }
+
         }, mDistanceStartYear, mDistanceStartMonth, mDistanceStartDay);
     }
 
     private void setListener(){
-        mTvStartBeforeAfterDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //打开日历选择器
-                mAfterBeforeStartDatePicker.show();
-            }
+        mTvStartBeforeAfterDay.setOnClickListener(v -> {
+            //打开日历选择器
+            mAfterBeforeStartDatePicker.show();
         });
 
         mEtDayAfter.addTextChangedListener(new TextWatcher() {
@@ -266,12 +259,9 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
         });
 
 
-        mTvStartDistanceDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //打开日历选择器
-                mDistanceStartDatePicker.show();
-            }
+        mTvStartDistanceDay.setOnClickListener(v -> {
+            //打开日历选择器
+            mDistanceStartDatePicker.show();
         });
 
     }
