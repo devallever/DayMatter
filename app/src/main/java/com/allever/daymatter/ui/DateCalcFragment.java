@@ -138,6 +138,9 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
     }
 
     private void initDialog(){
+        if (getActivity() == null) {
+            return;
+        }
         //几天前几天后的日历选择器
         mAfterBeforeStartDatePicker = new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
             //1.刷新界面

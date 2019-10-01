@@ -33,7 +33,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Allever on 18/5/22.
+ *
+ * @author Allever
+ * @date 18/5/22
  */
 
 public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, DayMatterDetailPresenter> implements IDayMatterDetailView {
