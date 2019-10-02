@@ -6,14 +6,12 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.allever.daymatter.R;
 import com.allever.daymatter.ui.adapter.DayMatterListAdapter;
 import com.allever.daymatter.bean.ItemDayMatter;
@@ -22,6 +20,7 @@ import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DayMatterListPresenter;
 import com.allever.daymatter.mvp.view.IDayMatterListView;
 import com.allever.daymatter.utils.Constants;
+import com.allever.lib.common.util.log.LogUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,6 +64,8 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
 
     private ArrayList<ItemDayMatter> mData = new ArrayList<>();
 
+    private int mSortId = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,8 +80,12 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         //初始化控件并设置监听
         initView();
 
-        //获取全部事件列表数据
-        mPresenter.getDayMatterData(getActivity());
+
+        if (mSortId == 0) {
+            mPresenter.getDayMatterData(getActivity());
+        } else {
+            mPresenter.getDayMatterData(getActivity(), mSortId);
+        }
 
         return view;
     }
@@ -91,12 +96,9 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         mRv.setAdapter(mAdapter);
 
         //设置列表监听器
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //跳转事件详细信息界面
-                DayMatterDetailActivity.startSelf(getActivity(), mData, position);
-            }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            //跳转事件详细信息界面
+            DayMatterDetailActivity.startSelf(getActivity(), mData, position);
         });
     }
 
@@ -112,7 +114,8 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.id_main_cv_no_data, R.id.id_btn_add_event})
+    @OnClick({R.id.id_main_cv_no_data,
+            R.id.id_btn_add_event})
     public void onViewClicked() {
         EditDayMatterActivity.startSelf(mActivity, false, -1);
     }
@@ -173,7 +176,8 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
 
         String eventType = event.getEvent();
         int sortId = event.getSortId();
-        Log.d(TAG, "onRefreshDayMatterData: sort id = " + sortId);
+        mSortId = sortId;
+        LogUtils.INSTANCE.d("onRefreshDayMatterData: sort id = " + sortId);
 
         switch (eventType){
             //从主界面点击显示类型时接收到的消息事件
@@ -188,15 +192,9 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
 
             //新增倒计时事件接收到的消息事件
             case Constants.EVENT_ADD_DAY_MATTER:
-                mPresenter.getDayMatterData(getActivity(), sortId);
-                break;
-
-            //修改
+                //修改
             case Constants.EVENT_MODIFY_DAY_MATTER:
-                mPresenter.getDayMatterData(getActivity(), sortId);
-                break;
-
-            //删除
+                //删除
             case Constants.EVENT_DELETE_DAY_MATTER:
                 mPresenter.getDayMatterData(getActivity(), sortId);
                 break;

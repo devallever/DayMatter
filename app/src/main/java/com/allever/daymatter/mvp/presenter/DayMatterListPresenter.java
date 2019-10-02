@@ -1,7 +1,6 @@
 package com.allever.daymatter.mvp.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.allever.daymatter.bean.ItemDayMatter;
 import com.allever.daymatter.data.DataListener;
@@ -10,22 +9,23 @@ import com.allever.daymatter.utils.DateUtils;
 import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BasePresenter;
 import com.allever.daymatter.mvp.view.IDayMatterListView;
+import com.allever.lib.common.util.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Allever on 18/5/21.
+ *
+ * @author Allever
+ * @date 18/5/21
  */
 
 public class DayMatterListPresenter extends BasePresenter<IDayMatterListView>{
-    private static final String TAG = "DayMatterListPresenter";
-
     /**
      * 获取指定分类事件列表
      * */
     public void getDayMatterData(final Context context, int sortId) {
-        Log.d(TAG, "getDayMatterData: with sortId");
+        LogUtils.INSTANCE.d("getDayMatterData: with sortId");
         mDataSource.getSortEventList(sortId, new DataListener<List<Event>>() {
             @Override
             public void onSuccess(List<Event> data) {
@@ -42,7 +42,7 @@ public class DayMatterListPresenter extends BasePresenter<IDayMatterListView>{
      * 获取所有事件
      * */
     public void getDayMatterData(final Context context) {
-        Log.d(TAG, "getDayMatterData: ");
+        LogUtils.INSTANCE.d( "getDayMatterData: ");
         mDataSource.getAllEventList(new DataListener<List<Event>>() {
             @Override
             public void onSuccess(List<Event> data) {
