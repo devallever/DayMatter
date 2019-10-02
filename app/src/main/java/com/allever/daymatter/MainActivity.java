@@ -101,6 +101,7 @@ public class MainActivity extends
     }
 
     private void initView() {
+        mVp.setOffscreenPageLimit(3);
         mVp.setAdapter(mViewPagerAdapter);
 
         mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
