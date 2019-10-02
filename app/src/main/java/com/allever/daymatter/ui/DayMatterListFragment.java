@@ -1,5 +1,6 @@
 package com.allever.daymatter.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -21,6 +22,7 @@ import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DayMatterListPresenter;
 import com.allever.daymatter.mvp.view.IDayMatterListView;
 import com.allever.daymatter.utils.Constants;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,6 +56,8 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
     CardView mCvNoData;
     @BindView(R.id.id_fg_day_matter_list_ll_list_container)
     LinearLayout mLlListContainer;
+    @BindView(R.id.id_btn_add_event)
+    FloatingActionButton mBtnAddEvent;
 
     private Unbinder unbinder;
 
@@ -108,13 +112,15 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick(R.id.id_main_cv_no_data)
+    @OnClick({R.id.id_main_cv_no_data, R.id.id_btn_add_event})
     public void onViewClicked() {
         EditDayMatterActivity.startSelf(mActivity, false, -1);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void setDayMatterList(List<ItemDayMatter> dayMatterList) {
+        mBtnAddEvent.setVisibility(View.VISIBLE);
 
         //如果数据为空时，则不做处理，默认显示一个空数据时的界面
         if (dayMatterList == null){
@@ -131,10 +137,12 @@ public class DayMatterListFragment extends BaseFragment<IDayMatterListView, DayM
         mAdapter.notifyDataSetChanged();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void setEmptyData() {
         mCvNoData.setVisibility(View.VISIBLE);
         mLlListContainer.setVisibility(View.GONE);
+        mBtnAddEvent.setVisibility(View.GONE);
     }
 
     @Override
