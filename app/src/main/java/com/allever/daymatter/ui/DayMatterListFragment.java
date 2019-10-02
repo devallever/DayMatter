@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.allever.daymatter.R;
-import com.allever.daymatter.adapter.DayMatterListAdapter;
+import com.allever.daymatter.ui.adapter.DayMatterListAdapter;
 import com.allever.daymatter.bean.ItemDayMatter;
 import com.allever.daymatter.event.EventDayMatter;
 import com.allever.daymatter.mvp.BaseFragment;

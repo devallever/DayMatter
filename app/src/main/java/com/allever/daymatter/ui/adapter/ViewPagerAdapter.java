@@ -1,4 +1,4 @@
-package com.allever.daymatter.adapter;
+package com.allever.daymatter.ui.adapter;
 
 import android.content.Context;
 import androidx.fragment.app.Fragment;

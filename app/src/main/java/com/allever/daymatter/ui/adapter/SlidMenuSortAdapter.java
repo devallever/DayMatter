@@ -1,4 +1,4 @@
-package com.allever.daymatter.adapter;
+package com.allever.daymatter.ui.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

@@ -3,10 +3,9 @@ package com.allever.daymatter.mvp.presenter
 import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import com.allever.daymatter.MyApp
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
-import com.allever.daymatter.dialog.DialogHelper
+import com.allever.daymatter.ui.dialog.DialogHelper
 import com.allever.daymatter.event.SortEvent
 import com.allever.daymatter.mvp.BasePresenter
 import com.allever.daymatter.mvp.view.ISortListView

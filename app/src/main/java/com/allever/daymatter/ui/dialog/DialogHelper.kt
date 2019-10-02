@@ -1,4 +1,4 @@
-package com.allever.daymatter.dialog
+package com.allever.daymatter.ui.dialog
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
-import com.allever.daymatter.adapter.DialogSortAdapter
+import com.allever.daymatter.ui.adapter.DialogSortAdapter
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
 import com.allever.daymatter.data.Repository

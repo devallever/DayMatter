@@ -1,4 +1,4 @@
-package com.allever.daymatter.adapter
+package com.allever.daymatter.ui.adapter
 
 import com.allever.daymatter.data.Event
 import com.chad.library.adapter.base.BaseQuickAdapter

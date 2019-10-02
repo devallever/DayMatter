@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.allever.daymatter.R;
-import com.allever.daymatter.dialog.RepeatTypeDialog;
-import com.allever.daymatter.dialog.SortDialog;
+import com.allever.daymatter.ui.dialog.RepeatTypeDialog;
+import com.allever.daymatter.ui.dialog.SortDialog;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.presenter.ModifyDayMatterPresenter;
 import com.allever.daymatter.mvp.view.IModifyDayMatterView;

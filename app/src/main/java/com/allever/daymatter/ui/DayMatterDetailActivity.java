@@ -13,7 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.allever.daymatter.R;
-import com.allever.daymatter.adapter.ViewPagerAdapter;
+import com.allever.daymatter.ui.adapter.ViewPagerAdapter;
 import com.allever.daymatter.bean.ItemDayMatter;
 import com.allever.daymatter.event.EventDayMatter;
 import com.allever.daymatter.mvp.BaseActivity;

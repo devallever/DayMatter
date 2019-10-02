@@ -1,4 +1,4 @@
-package com.allever.daymatter.dialog;
+package com.allever.daymatter.ui.dialog;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

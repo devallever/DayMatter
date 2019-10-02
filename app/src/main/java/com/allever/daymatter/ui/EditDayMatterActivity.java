@@ -23,12 +23,12 @@ import android.widget.TextView;
 
 import com.allever.daymatter.data.Event;
 import com.allever.daymatter.data.Repository;
-import com.allever.daymatter.dialog.DialogHelper;
+import com.allever.daymatter.ui.dialog.DialogHelper;
 import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.mvp.presenter.EditDayMatterPresenter;
 import com.allever.daymatter.utils.ToastUtil;
 import com.allever.daymatter.R;
-import com.allever.daymatter.dialog.RepeatTypeDialog;
+import com.allever.daymatter.ui.dialog.RepeatTypeDialog;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.view.IAddDayMatterView;
 import com.allever.daymatter.utils.Constants;

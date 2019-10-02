@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
-import com.allever.daymatter.adapter.SortAdapter
+import com.allever.daymatter.ui.adapter.SortAdapter
 import com.allever.daymatter.data.Event
 import com.allever.daymatter.mvp.BaseActivity
 import com.allever.daymatter.mvp.presenter.SortListPresenter
