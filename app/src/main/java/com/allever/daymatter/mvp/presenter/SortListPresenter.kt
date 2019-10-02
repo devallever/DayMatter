@@ -18,8 +18,12 @@ class SortListPresenter : BasePresenter<ISortListView>() {
 
     fun getSlideMenuSortData(context: Context) {
         //List<ItemSlidMenuSort> list  = mDataSource.getSlidMenuSortData(context);
-        mDataSource.getSortData(context, object : DataListener<List<Event.Sort>> {
-            override fun onSuccess(data: List<Event.Sort>) {
+        mDataSource.getSortData(context, object : DataListener<MutableList<Event.Sort>> {
+            override fun onSuccess(data: MutableList<Event.Sort>) {
+                val first = Event.Sort()
+                first.id = 0
+                first.name = App.context.getString(R.string.all)
+                data.add(0, first)
                 mViewRef.get()?.setSortData(data)
                 val sortEvent = SortEvent()
                 EventBus.getDefault().post(sortEvent)

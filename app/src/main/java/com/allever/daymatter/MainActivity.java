@@ -232,10 +232,12 @@ public class MainActivity extends
             case Constants.EVENT_DELETE_DAY_MATTER:
             case Constants.EVENT_ADD_DAY_MATTER:
 //                mPresenter.getSlideMenuSortData(this);
+                mPresenter.updateTitle(event.getSortId());
+                mVp.setCurrentItem(0, true);
                 break;
             case Constants.EVENT_SELECT_DISPLAY_SORT_LIST:
                 mVp.setCurrentItem(0, true);
-                mPresenter.updateTitle(event.getName());
+                mPresenter.updateTitle(event.getSortId());
                 break;
             default:
                 break;

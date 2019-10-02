@@ -102,7 +102,7 @@ class SortFragment: BaseFragment<ISortListView,
     override fun onItemClick(menuBridge: SwipeMenuBridge?, adapterPosition: Int) {
         menuBridge?.closeMenu()
         val menuIndex = menuBridge?.position
-        if (adapterPosition in 0..2) {
+        if (adapterPosition in 0..3) {
             showToast(getString(R.string.can_not_modify_default_sort))
             return
         }

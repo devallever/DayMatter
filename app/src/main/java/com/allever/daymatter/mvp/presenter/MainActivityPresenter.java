@@ -3,14 +3,10 @@ package com.allever.daymatter.mvp.presenter;
 import android.content.Context;
 
 import com.allever.daymatter.R;
-import com.allever.daymatter.bean.ItemSlidMenuSort;
-import com.allever.daymatter.data.DataListener;
 import com.allever.daymatter.utils.SPUtils;
 import com.allever.daymatter.mvp.BasePresenter;
 import com.allever.daymatter.mvp.view.IMainActivityView;
 import com.allever.lib.common.app.App;
-
-import java.util.List;
 
 /**
  * Created by Allever on 18/5/21.
@@ -34,8 +30,12 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> {
         mViewRef.get().updateTitle(mAppName + "." + mCurrentSortName);
     }
 
-    public void updateTitle(String sortName) {
-        mCurrentSortName = sortName;
+    public void updateTitle(int id) {
+        if (id == 0) {
+            mCurrentSortName = App.context.getString(R.string.all);
+        } else {
+            mCurrentSortName = mDataSource.getSortName(id);
+        }
         updateTitle();
     }
 }
