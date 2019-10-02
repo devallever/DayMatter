@@ -1,7 +1,7 @@
 package com.allever.daymatter.utils
 
 import android.content.Context
-import com.allever.daymatter.App
+import com.allever.lib.common.app.App
 
 /**
  * SharedPreferences 工具类
@@ -12,7 +12,7 @@ object SpUtil {
     private const val SP_FILE_NAME = "ALSKF_ALSKDJFO"
     /** SharedPreferences 对象 */
     private val mSharePreference =
-        App.context.getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE)
+            App.context.getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE)
 
     /**
      * 保存字符串

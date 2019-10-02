@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.umeng.analytics.MobclickAgent;
 import com.allever.daymatter.R;
 import com.allever.daymatter.adapter.ViewPagerAdapter;
 import com.allever.daymatter.bean.ItemDayMatter;
@@ -77,17 +76,6 @@ public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, 
         initData();
 
         initView();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.allever.daymatter.utils.TimeUtils;
-import com.umeng.analytics.MobclickAgent;
 import com.allever.daymatter.R;
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.mvp.BaseFragment;
@@ -105,17 +104,6 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
         initDialog();
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(getActivity());
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(getActivity());
     }
 
     private void initDialog() {

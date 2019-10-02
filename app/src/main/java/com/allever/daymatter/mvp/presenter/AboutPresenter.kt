@@ -1,9 +1,9 @@
 package com.allever.daymatter.mvp.presenter
 
-import com.allever.daymatter.App
 import com.allever.daymatter.mvp.BasePresenter
 import com.allever.daymatter.mvp.view.IAboutView
 import com.allever.daymatter.utils.SystemUtils
+import com.allever.lib.common.app.App
 
 class AboutPresenter: BasePresenter<IAboutView>() {
 

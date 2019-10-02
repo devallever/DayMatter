@@ -4,19 +4,17 @@ import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
-import com.allever.daymatter.App
 import com.allever.daymatter.adapter.DialogSortAdapter
 import com.allever.daymatter.data.DataListener
 import com.allever.daymatter.data.Event
 import com.allever.daymatter.data.Repository
 import com.allever.daymatter.R
+import com.allever.lib.common.app.App
 import java.lang.Exception
 
 object DialogHelper{

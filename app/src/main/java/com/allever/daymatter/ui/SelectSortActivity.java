@@ -3,7 +3,6 @@ package com.allever.daymatter.ui;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
-import com.umeng.analytics.MobclickAgent;
 import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BaseActivity;
 import com.allever.daymatter.mvp.presenter.SelectSortPresenter;
@@ -18,17 +17,6 @@ public class SelectSortActivity extends BaseActivity<ISelectSortView, SelectSort
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_sort);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

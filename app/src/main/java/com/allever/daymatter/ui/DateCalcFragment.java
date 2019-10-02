@@ -13,8 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.allever.demoapp.util.ToastUtil;
-import com.umeng.analytics.MobclickAgent;
+import com.allever.daymatter.utils.ToastUtil;
 import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DateCalcPresenter;
@@ -100,17 +99,6 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
         setListener();
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(getActivity());
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(getActivity());
     }
 
     private void initData(){

@@ -3,8 +3,8 @@ package com.allever.daymatter.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.allever.daymatter.App
 import com.allever.daymatter.R
+import com.allever.lib.common.app.App
 
 object CommonHalper {
 

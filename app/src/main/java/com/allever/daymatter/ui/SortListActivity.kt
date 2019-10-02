@@ -15,7 +15,6 @@ import com.allever.daymatter.mvp.presenter.SortListPresenter
 import com.allever.daymatter.mvp.view.ISortListView
 import com.allever.daymatter.utils.DisplayUtil
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.umeng.analytics.MobclickAgent
 import com.yanzhenjie.recyclerview.*
 import com.allever.daymatter.R
 
@@ -43,16 +42,6 @@ class SortListActivity : BaseActivity<ISortListView,
 
         mPresenter.getSlideMenuSortData(this)
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        MobclickAgent.onResume(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        MobclickAgent.onPause(this)
     }
 
     private fun initView() {
