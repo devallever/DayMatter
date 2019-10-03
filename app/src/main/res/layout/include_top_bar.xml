@@ -5,7 +5,7 @@
 		android:id="@+id/top_bar"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/default_top_bar_height"
-		android:background="@color/default_top_bar_background_color">
+		android:background="@color/colorDefault">
 
 		<ImageView
 			android:id="@+id/iv_back"
@@ -13,7 +13,6 @@
 			android:layout_height="@dimen/default_icon_height"
 			android:layout_centerVertical="true"
 			android:src="@drawable/icon_back"
-			android:tint="@color/default_icon_color_filter"
 			android:scaleType="centerInside"/>
 
 		<!-- 标题 -->
@@ -35,7 +34,7 @@
 				android:text=""
 				android:textSize="18sp"
 				android:textStyle="bold"
-				android:textColor="@color/default_tv_color"/>
+				android:textColor="@color/white"/>
 		</LinearLayout>
 
 		<ImageView

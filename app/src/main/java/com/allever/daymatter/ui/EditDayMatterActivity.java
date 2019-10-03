@@ -201,7 +201,6 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
             public void onOkClick(@NotNull AlertDialog dialog, @NotNull String etContent) {
                 if (etContent.isEmpty()) {
                     ToastUtil.INSTANCE.show("请输入内容");
-                    return;
                 } else {
                     Event.Sort sort = Repository.getIns().saveSort(etContent);
                     SortEvent sortEvent = new SortEvent();

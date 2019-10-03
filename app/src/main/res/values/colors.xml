@@ -39,5 +39,6 @@
     <!-- 分割线 -->
     <color name="dividing_line_color">#26ffffff</color>
 
+    <color name="master_event_fg_top_bg">#66000000</color>
 
 </resources>
