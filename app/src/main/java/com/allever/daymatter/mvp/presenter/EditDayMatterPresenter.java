@@ -174,6 +174,7 @@ public class EditDayMatterPresenter extends BasePresenter<IAddDayMatterView> {
 
     public void updateEvent(int eventId, String eventTitle) {
         mViewRef.get().showProgressDialog();
+        mEvent.setTitle(eventTitle);
         mDataSource.updateEvent(mEvent);
 
         mViewRef.get().finishSelf();

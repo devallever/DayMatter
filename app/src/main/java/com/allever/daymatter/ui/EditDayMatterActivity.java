@@ -41,7 +41,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Allever on 18/5/21.
+ *
+ * @author Allever
+ * @date 18/5/21
  */
 
 public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditDayMatterPresenter> implements IAddDayMatterView {
@@ -231,19 +233,13 @@ public class EditDayMatterActivity extends BaseActivity<IAddDayMatterView, EditD
     }
 
     private void setListener() {
-        mSwitchIsTop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPresenter.setmTop(isChecked);
-            }
-        });
+        mSwitchIsTop.setOnCheckedChangeListener((buttonView, isChecked) ->
+                mPresenter.setmTop(isChecked)
+        );
 
-        mSwitchEndDate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPresenter.setmEndDateSwitch(isChecked);
-            }
-        });
+        mSwitchEndDate.setOnCheckedChangeListener((buttonView, isChecked) ->
+                mPresenter.setmEndDateSwitch(isChecked)
+        );
     }
 
     @OnClick({R.id.id_input_tv_date,
