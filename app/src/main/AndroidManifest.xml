@@ -38,8 +38,12 @@
             />
 
         <!-- 友盟 -->
-        <meta-data android:value="5cdd4b800cafb24a45000581" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="googleplay" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5d959b3e0cafb2bb06000950"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
     </application>
 
 </manifest>

@@ -1,8 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 ext{
-    signingStoreFile = 'com.allever.daymatter.jks'
-    signingKeyAlias = 'daymatter'
+    //C:\Users\Allever\AndroidStudioProjects/com.allever.app.jks
+    signingStoreFile = '../../com.allever.app.jks'
+    signingKeyAlias = 'allever'
     signingStorePassword = 'dixm5400'
     signingKeyPassword = 'dixm5400'
 }

@@ -12,6 +12,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        //默认渠道为官网
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "offical"]
+    }
+
+    //友盟多渠道
+    flavorDimensions "mark"
+    productFlavors {
+        google {}
+        xiaomi {}
+        baidu {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
     //解决butterknife编译异常

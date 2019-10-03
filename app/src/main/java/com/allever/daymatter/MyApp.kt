@@ -1,9 +1,7 @@
 package com.allever.daymatter
 
-import android.app.Application
-import android.content.Context
-import androidx.multidex.MultiDex
 import com.allever.lib.common.app.App
+import com.allever.lib.umeng.UMeng
 
 import org.litepal.LitePal
 
@@ -16,5 +14,6 @@ class MyApp : App(){
         super.onCreate()
         context = this
         LitePal.initialize(this)
+        UMeng.init(this)
     }
 }
