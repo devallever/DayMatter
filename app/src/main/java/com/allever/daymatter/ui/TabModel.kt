@@ -48,7 +48,7 @@ internal object TabModel {
          *
          */
         MATTER(DayMatterDetailFragment::class.java, R.drawable.ic_matter, R.string.matter),
-        SORT(SortFragment::class.java, R.drawable.ic_calc, R.string.sort),
+        SORT(SortFragment::class.java, R.drawable.ic_sort, R.string.sort),
         CALC(DateCalcFragment::class.java, R.drawable.ic_calc, R.string.calc),
         SETTING(SettingFragment::class.java, R.drawable.ic_setting, R.string.setting);
 
