@@ -1,8 +1,11 @@
 package com.allever.daymatter.ui;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +16,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.allever.daymatter.ad.AdConstants;
 import com.allever.daymatter.utils.TimeUtils;
 import com.allever.daymatter.R;
 import com.allever.daymatter.data.Config;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.SettingPresenter;
 import com.allever.daymatter.mvp.view.ISettingView;
+import com.allever.lib.ad.chain.AdChainHelper;
+import com.allever.lib.ad.chain.AdChainListener;
+import com.allever.lib.ad.chain.IAd;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,6 +90,11 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
 
     private Config mConfig;
 
+    private IAd mVideoAd;
+    private IAd mInsertAd;
+    private IAd mBannerAd;
+    private ViewGroup mBannerContainer;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,6 +116,8 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
         setListener();
 
         initDialog();
+
+        mBannerContainer = view.findViewById(R.id.bannerContainer);
 
         return view;
     }
@@ -173,6 +189,15 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        destroyAd(mVideoAd);
+        destroyAd(mBannerAd);
+        destroyAd(mInsertAd);
+    }
+
+    private void destroyAd(IAd ad) {
+        if (ad != null) {
+            ad.destroy();
+        }
     }
 
     @Override
@@ -207,7 +232,8 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
             R.id.id_fg_remind_rl_before_day_switch_container,
             R.id.id_fg_remind_rl_before_day_remind_time_container,
             R.id.id_fg_remind_rl_before_day_remind_about_container,
-            R.id.id_fg_remind_rl_before_day_remind_feedback_container})
+            R.id.id_fg_remind_rl_before_day_remind_feedback_container,
+            R.id.id_fg_remind_rl_before_day_remind_support_container})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //当天提醒
@@ -236,8 +262,150 @@ public class SettingFragment extends BaseFragment<ISettingView, SettingPresenter
             case R.id.id_fg_remind_rl_before_day_remind_feedback_container:
                 mPresenter.feedback(getActivity());
                 break;
+            case R.id.id_fg_remind_rl_before_day_remind_support_container:
+                supportUS();
+                break;
             default:
                 break;
         }
+    }
+
+    private void supportUS() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("需要消耗流量，是否继续？")
+                .setPositiveButton("确定", (dialog, which) -> {
+                    loadVideoAd();
+                })
+                .setNegativeButton("残忍拒绝", (dialog, which) -> {
+                    loadBannerAd();
+                    showToast("点击下面小广告支持我们");
+                })
+                .show();
+    }
+
+    private void loadVideoAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_VIDEO(), null, new AdChainListener() {
+            @Override
+            public void onLoaded(@org.jetbrains.annotations.Nullable IAd ad) {
+                mVideoAd = ad;
+                if (mVideoAd != null) {
+                    mVideoAd.show();
+                }
+            }
+
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+                loadInsertAd();
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
+    }
+
+    private void loadInsertAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_INSERT(), null, new AdChainListener() {
+            @Override
+            public void onLoaded(@org.jetbrains.annotations.Nullable IAd ad) {
+                mInsertAd = ad;
+                if (mInsertAd != null) {
+                    mInsertAd.show();
+                }
+            }
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+                loadBannerAd();
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
+    }
+
+    private void loadBannerAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_BANNER(), mBannerContainer, new AdChainListener() {
+            @Override
+            public void onLoaded(@org.jetbrains.annotations.Nullable IAd ad) {
+                mBannerAd = ad;
+            }
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+                showToast("点击下方小广告也是对我们的支持");
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
     }
 }

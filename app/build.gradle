@@ -15,6 +15,12 @@ android {
 
         //默认渠道为官网
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "offical"]
+
+        //在Manifest.xml中使用的值
+        manifestPlaceholders += [
+                ADMOB_APP_ID: rootProject.ext.admobAppId
+        ]
+
     }
 
     //友盟多渠道
@@ -119,6 +125,7 @@ dependencies {
     implementation project(':permission')
     implementation project(':common')
     implementation project(':umeng')
+    implementation project(':admob')
     implementation(name: "Toolkit-1.1", ext: 'aar')
 
 }

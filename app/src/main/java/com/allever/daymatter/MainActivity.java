@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.allever.daymatter.ad.AdConstants;
 import com.allever.daymatter.event.Event;
 import com.allever.daymatter.event.SortEvent;
 import com.allever.daymatter.ui.DateCalcFragment;
@@ -28,10 +29,15 @@ import com.allever.daymatter.mvp.view.IMainActivityView;
 import com.allever.daymatter.ui.widget.tab.TabLayout;
 import com.allever.daymatter.utils.Constants;
 import com.allever.daymatter.utils.DisplayUtil;
+import com.allever.lib.ad.chain.AdChainHelper;
+import com.allever.lib.ad.chain.AdChainListener;
+import com.allever.lib.ad.chain.IAd;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +65,8 @@ public class MainActivity extends
     private int mainTabHighlight = 0;
     private int mainTabUnselectColor = 0;
 
+    private IAd mInsertAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +86,17 @@ public class MainActivity extends
         initViewPagerData();
 
         initView();
+
+        loadInsertAd();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (mInsertAd != null) {
+            mInsertAd.destroy();
+        }
     }
 
     @Override
@@ -211,6 +224,18 @@ public class MainActivity extends
 
     @Override
     public void onBackPressed() {
+        if (mIsAdLoaded) {
+            if (mInsertAd != null) {
+                mInsertAd.show();
+                mIsAdLoaded = false;
+            }
+        } else {
+            checkExit();
+        }
+    }
+
+
+    private void checkExit() {
         long currentTime = System.currentTimeMillis();
         if (mPrevClickBackTime == -1 || currentTime - mPrevClickBackTime > 3000) {
             mPrevClickBackTime = currentTime;
@@ -218,9 +243,8 @@ public class MainActivity extends
                     Toast.LENGTH_LONG).show();
             return;
         }
-        Process.killProcess(Process.myPid());
+        super.onBackPressed();
     }
-
     /**
      * 响应倒计时事件操作
      * 添加、删除、修改事件都需要刷新列表
@@ -262,5 +286,47 @@ public class MainActivity extends
         textView.setText(tab.getLabelResId());
         imageView.setImageResource(tab.getIconResId());
         return view;
+    }
+
+    private boolean mIsAdLoaded = false;
+    private void loadInsertAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_INSERT(), null, new AdChainListener() {
+            @Override
+            public void onLoaded(@Nullable IAd ad) {
+                mInsertAd = ad;
+                mIsAdLoaded = true;
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+
+            }
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
     }
 }

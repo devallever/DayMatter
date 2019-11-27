@@ -13,12 +13,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.allever.daymatter.ad.AdConstants;
 import com.allever.daymatter.utils.ToastUtil;
 import com.allever.daymatter.R;
 import com.allever.daymatter.mvp.BaseFragment;
 import com.allever.daymatter.mvp.presenter.DateCalcPresenter;
 import com.allever.daymatter.mvp.view.IDateCalcView;
 import com.allever.daymatter.utils.DateUtils;
+import com.allever.lib.ad.chain.AdChainHelper;
+import com.allever.lib.ad.chain.AdChainListener;
+import com.allever.lib.ad.chain.IAd;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
@@ -87,6 +93,9 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
 
     private static final int MAX_CALC_VALUE = 999999;
 
+    private ViewGroup mBannerContainer;
+    private IAd mBannerAd;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,6 +111,9 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
         initDialog();
 
         setListener();
+
+        mBannerContainer = view.findViewById(R.id.bannerContainer);
+        loadBannerAd();
 
         return view;
     }
@@ -278,5 +290,51 @@ public class DateCalcFragment extends BaseFragment<IDateCalcView, DateCalcPresen
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        if (mBannerAd != null) {
+            mBannerAd.destroy();
+        }
+    }
+
+    private void loadBannerAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_BANNER(), mBannerContainer, new AdChainListener() {
+            @Override
+            public void onLoaded(@org.jetbrains.annotations.Nullable IAd ad) {
+                mBannerAd = ad;
+                if (mBannerAd != null) {
+                    mBannerAd.show();
+                }
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+
+            }
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
     }
 }

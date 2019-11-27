@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.allever.daymatter.ad.AdConstants;
+import com.allever.lib.ad.chain.AdChainHelper;
+import com.allever.lib.ad.chain.AdChainListener;
+import com.allever.lib.ad.chain.IAd;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -24,6 +29,7 @@ import com.allever.daymatter.utils.Constants;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +62,7 @@ public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, 
     private List<ItemDayMatter> mItemDayMatterList;
     private int mPagePosition;
 
+    private IAd mInsertAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,12 +85,17 @@ public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, 
         initData();
 
         initView();
+
+        loadInsertAd();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (mInsertAd != null) {
+            mInsertAd.destroy();
+        }
     }
 
     private void initData(){
@@ -157,5 +169,47 @@ public class DayMatterDetailActivity extends BaseActivity<IDayMatterDetailView, 
             default:
                 break;
         }
+    }
+
+    private void loadInsertAd() {
+        AdChainHelper.INSTANCE.loadAd(AdConstants.INSTANCE.getAD_NAME_INSERT(), null, new AdChainListener() {
+            @Override
+            public void onLoaded(@org.jetbrains.annotations.Nullable IAd ad) {
+                mInsertAd = ad;
+                if (mInsertAd != null) {
+                    mInsertAd.show();
+                }
+            }
+
+            @Override
+            public void onFailed(@NotNull String msg) {
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+
+            @Override
+            public void onStimulateSuccess() {
+
+            }
+
+            @Override
+            public void playEnd() {
+
+            }
+
+
+            @Override
+            public void onShowed() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+        });
     }
 }

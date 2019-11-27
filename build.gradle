@@ -1,6 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 ext{
+
+    admobAppId = "ca-app-pub-8815582923430605~3014976112"
+
     //C:\Users\Allever\AndroidStudioProjects/com.allever.app.jks
     signingStoreFile = '../../com.allever.app.jks'
     signingKeyAlias = 'allever'

@@ -1,5 +1,8 @@
 package com.allever.daymatter
 
+import com.allever.daymatter.ad.AdConstants
+import com.allever.daymatter.ad.AdFactory
+import com.allever.lib.ad.chain.AdChainHelper
 import com.allever.lib.common.app.App
 import com.allever.lib.umeng.UMeng
 
@@ -15,5 +18,6 @@ class MyApp : App(){
         context = this
         LitePal.initialize(this)
         UMeng.init(this)
+        AdChainHelper.init(this, AdConstants.adData, AdFactory())
     }
 }
