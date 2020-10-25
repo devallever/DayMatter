@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
-        applicationId "com.allever.daymatter"
-        minSdkVersion 15
-        targetSdkVersion 28
+        applicationId "org.xm.app.daymatter"
+        minSdkVersion 16
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,9 +26,10 @@ android {
     //友盟多渠道
     flavorDimensions "mark"
     productFlavors {
-        google {}
-        xiaomi {}
-        baidu {}
+        ad {}
+//        google {}
+//        xiaomi {}
+//        baidu {}
     }
 
     productFlavors.all {
